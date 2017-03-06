@@ -45,8 +45,14 @@ Change the variables below
 - Add the buildpacks
     ```
     https://github.com/ScarletKuro/nadeko-dotnetcore-buildpack
+    ```
+    ```
     https://ingmferrer@bitbucket.org/ingmferrer/opus-buildpack.git
+    ```
+    ```
     https://github.com/challengee/heroku-buildpack-libsodium.git
+    ```
+    ```
     https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
     ```
 - Deploy now the Nadeko using DropBox, Heroku CLI or Github
