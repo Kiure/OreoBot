@@ -46,7 +46,7 @@ namespace NadekoBot.Services
                 return false;
             uow.CurrencyTransactions.Add(new CurrencyTransaction()
             {
-                UserId = authorId,
+                UserId = (long) authorId,
                 Reason = reason,
                 Amount = -amount,
             });
@@ -68,7 +68,7 @@ namespace NadekoBot.Services
 
             var transaction = new CurrencyTransaction()
             {
-                UserId = receiverId,
+                UserId = (long) receiverId,
                 Reason = reason,
                 Amount = amount,
             };

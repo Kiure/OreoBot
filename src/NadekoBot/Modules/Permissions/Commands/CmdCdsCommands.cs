@@ -29,7 +29,7 @@ namespace NadekoBot.Modules.Permissions
             static CmdCdsCommands()
             {
                 var configs = NadekoBot.AllGuildConfigs;
-                CommandCooldowns = new ConcurrentDictionary<ulong, ConcurrentHashSet<CommandCooldown>>(configs.ToDictionary(k => k.GuildId, v => new ConcurrentHashSet<CommandCooldown>(v.CommandCooldowns)));
+                CommandCooldowns = new ConcurrentDictionary<ulong, ConcurrentHashSet<CommandCooldown>>(configs.ToDictionary(k => (ulong)k.GuildId, v => new ConcurrentHashSet<CommandCooldown>(v.CommandCooldowns)));
             }
             [NadekoCommand, Usage, Description, Aliases]
             [RequireContext(ContextType.Guild)]

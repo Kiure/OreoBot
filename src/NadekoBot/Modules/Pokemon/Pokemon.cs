@@ -59,7 +59,7 @@ namespace NadekoBot.Modules.Pokemon
             Dictionary<ulong, string> setTypes;
             using (var uow = DbHandler.UnitOfWork())
             {
-                setTypes = uow.PokeGame.GetAll().ToDictionary(x => x.UserId, y => y.type);
+                setTypes = uow.PokeGame.GetAll().ToDictionary(x => (ulong)x.UserId, y => y.type);
             }
 
             if (setTypes.ContainsKey(id))
@@ -323,10 +323,10 @@ namespace NadekoBot.Modules.Pokemon
                 var setTypes = pokeUsers.ToDictionary(x => x.UserId, y => y.type);
                 var pt = new UserPokeTypes
                 {
-                    UserId = user.Id,
+                    UserId = (long)user.Id,
                     type = targetType.Name,
                 };
-                if (!setTypes.ContainsKey(user.Id))
+                if (!setTypes.ContainsKey((long)user.Id))
                 {
                     //create user in db
                     uow.PokeGame.Add(pt);
@@ -334,7 +334,7 @@ namespace NadekoBot.Modules.Pokemon
                 else
                 {
                     //update user in db
-                    var pokeUserCmd = pokeUsers.FirstOrDefault(p => p.UserId == user.Id);
+                    var pokeUserCmd = pokeUsers.FirstOrDefault(p => p.UserId == (long)user.Id);
                     pokeUserCmd.type = targetType.Name;
                     uow.PokeGame.Update(pokeUserCmd);
                 }

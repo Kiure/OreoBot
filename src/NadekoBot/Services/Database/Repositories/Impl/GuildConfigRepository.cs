@@ -52,19 +52,19 @@ namespace NadekoBot.Services.Database.Repositories.Impl
                                 .Include(gc => gc.FilteredWords)
                                 .Include(gc => gc.GenerateCurrencyChannelIds)
                                 .Include(gc => gc.CommandCooldowns)
-                                .FirstOrDefault(c => c.GuildId == guildId);
+                                .FirstOrDefault(c => c.GuildId == (long)guildId);
             }
             else
             {
                 var set = includes(_set);
-                config = set.FirstOrDefault(c => c.GuildId == guildId);
+                config = set.FirstOrDefault(c => c.GuildId == (long)guildId);
             }
 
             if (config == null)
             {
                 _set.Add((config = new GuildConfig
                 {
-                    GuildId = guildId,
+                    GuildId = (long)guildId,
                     RootPermission = Permission.GetDefaultRoot(),
                 }));
                 _context.SaveChanges();
@@ -92,13 +92,13 @@ namespace NadekoBot.Services.Database.Repositories.Impl
                 query = query.ThenInclude(gc => gc.Next);
             }
 
-            var config = query.FirstOrDefault(c => c.GuildId == guildId);
+            var config = query.FirstOrDefault(c => c.GuildId == (long)guildId);
 
             if (config == null)
             {
                 _set.Add((config = new GuildConfig
                 {
-                    GuildId = guildId,
+                    GuildId = (long)guildId,
                     RootPermission = Permission.GetDefaultRoot(),
                 }));
                 _context.SaveChanges();
@@ -138,7 +138,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public void SetCleverbotEnabled(ulong id, bool cleverbotEnabled)
         {
-            var conf = _set.FirstOrDefault(gc => gc.GuildId == id);
+            var conf = _set.FirstOrDefault(gc => (ulong)gc.GuildId == id);
 
             if (conf == null)
                 return;

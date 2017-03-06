@@ -28,7 +28,7 @@ namespace NadekoBot.Modules.Games
         [Group]
         public class PlantPickCommands : NadekoSubmodule
         {
-            private static ConcurrentHashSet<ulong> generationChannels { get; }
+            private static ConcurrentHashSet<long> generationChannels { get; }
             //channelid/message
             private static ConcurrentDictionary<ulong, List<IUserMessage>> plantedFlowers { get; } = new ConcurrentDictionary<ulong, List<IUserMessage>>();
             //channelId/last generation
@@ -40,7 +40,7 @@ namespace NadekoBot.Modules.Games
 #if !GLOBAL_NADEKO
                 NadekoBot.Client.MessageReceived += PotentialFlowerGeneration;
 #endif
-                generationChannels = new ConcurrentHashSet<ulong>(NadekoBot.AllGuildConfigs
+                generationChannels = new ConcurrentHashSet<long>( NadekoBot.AllGuildConfigs
                     .SelectMany(c => c.GenerateCurrencyChannelIds.Select(obj => obj.ChannelId)));
             }
 
@@ -54,7 +54,7 @@ namespace NadekoBot.Modules.Games
                 if (channel == null)
                     return Task.CompletedTask;
 
-                if (!generationChannels.Contains(channel.Id))
+                if (!generationChannels.Contains((long) channel.Id))
                     return Task.CompletedTask;
 
                 var _ = Task.Run(async () =>
@@ -187,17 +187,17 @@ namespace NadekoBot.Modules.Games
                 {
                     var guildConfig = uow.GuildConfigs.For(channel.Id, set => set.Include(gc => gc.GenerateCurrencyChannelIds));
 
-                    var toAdd = new GCChannelId() { ChannelId = channel.Id };
+                    var toAdd = new GCChannelId() { ChannelId = (long) channel.Id };
                     if (!guildConfig.GenerateCurrencyChannelIds.Contains(toAdd))
                     {
                         guildConfig.GenerateCurrencyChannelIds.Add(toAdd);
-                        generationChannels.Add(channel.Id);
+                        generationChannels.Add((long) channel.Id);
                         enabled = true;
                     }
                     else
                     {
                         guildConfig.GenerateCurrencyChannelIds.Remove(toAdd);
-                        generationChannels.TryRemove(channel.Id);
+                        generationChannels.TryRemove((long) channel.Id);
                         enabled = false;
                     }
                     await uow.CompleteAsync();

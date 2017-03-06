@@ -58,7 +58,7 @@ namespace NadekoBot.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     AntiSpamSettingId = table.Column<int>(nullable: true),
-                    ChannelId = table.Column<ulong>(nullable: false)
+                    ChannelId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {

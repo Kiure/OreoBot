@@ -5,7 +5,7 @@ namespace NadekoBot.Services.Database.Models
 {
     public class CustomReaction : DbEntity
     {
-        public ulong? GuildId { get; set; }
+        public long? GuildId { get; set; }
         [NotMapped]
         public Regex Regex { get; set; }
         public string Response { get; set; }

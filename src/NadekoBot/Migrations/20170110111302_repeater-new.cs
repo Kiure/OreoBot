@@ -14,9 +14,9 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     Interval = table.Column<TimeSpan>(nullable: false),
                     Message = table.Column<string>(nullable: true)
                 },

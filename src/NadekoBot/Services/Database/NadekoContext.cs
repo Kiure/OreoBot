@@ -4,6 +4,10 @@ using System.Linq;
 using NadekoBot.Services.Database.Models;
 using NadekoBot.Extensions;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NadekoBot.Migrations;
+using CurrencyTransaction = NadekoBot.Services.Database.Models.CurrencyTransaction;
 
 namespace NadekoBot.Services.Database
 {
@@ -17,8 +21,10 @@ namespace NadekoBot.Services.Database
         /// <returns></returns>
         public NadekoContext Create(DbContextFactoryOptions options)
         {
-            var optionsBuilder = new DbContextOptionsBuilder();
-            optionsBuilder.UseSqlite("Filename=./data/NadekoBot.db");
+            var connectionString = NadekoBot.Credentials.Db.ConnectionString;
+            var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
+            //optionsBuilder.UseSqlite("Filename=./data/NadekoBot.db");
+            optionsBuilder.UseSqlServer(connectionString);
             return new NadekoContext(optionsBuilder.Options);
         }
     }
@@ -51,13 +57,17 @@ namespace NadekoBot.Services.Database
         public DbSet<RaceAnimal> RaceAnimals { get; set; }
         public DbSet<ModulePrefix> ModulePrefixes { get; set; }
 
-        public NadekoContext() : base()
-        {
+        //public NadekoContext() : base()
+        //{
 
-        }
+        //}
 
-        public NadekoContext(DbContextOptions options) : base(options)
+
+        public NadekoContext(DbContextOptions<NadekoContext> options) : base(options)
         {
+            
+            //Database.EnsureCreated();
+            //base.Database.EnsureCreated();
         }
 
         public void EnsureSeedData()
@@ -166,11 +176,10 @@ namespace NadekoBot.Services.Database
             #endregion
 
             #region BotConfig
-            //var botConfigEntity = modelBuilder.Entity<BotConfig>();
-            //botConfigEntity
+            //modelBuilder.Entity<BotConfig>()
             //    .HasMany(c => c.ModulePrefixes)
-            //    .WithOne(mp => mp.BotConfig)
-            //    .HasForeignKey(mp => mp.BotConfigId);
+             //   .WithOne(mp => mp.BotConfig)
+               // .HasForeignKey(mp => mp.BotConfigId);
                 
             #endregion
 
@@ -271,6 +280,7 @@ namespace NadekoBot.Services.Database
             var du = modelBuilder.Entity<DiscordUser>();
             du.HasAlternateKey(w => w.UserId);
 
+            //base.OnModelCreating(modelBuilder);
             #endregion
         }
     }

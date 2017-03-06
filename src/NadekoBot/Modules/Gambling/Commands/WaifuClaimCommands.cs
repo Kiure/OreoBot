@@ -79,7 +79,7 @@ namespace NadekoBot.Modules.Gambling
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     w = uow.Waifus.ByWaifuUserId(target.Id);
-                    isAffinity = (w?.Affinity?.UserId == Context.User.Id);
+                    isAffinity = (w?.Affinity?.UserId == (long)Context.User.Id);
                     if (w == null)
                     {
                         var claimer = uow.DiscordUsers.GetOrCreate(Context.User);
@@ -171,7 +171,7 @@ namespace NadekoBot.Modules.Gambling
                 var msg = GetText("waifu_claimed", 
                     Format.Bold(target.ToString()), 
                     amount + CurrencySign);
-                if (w.Affinity?.UserId == Context.User.Id)
+                if (w.Affinity?.UserId == (long)Context.User.Id)
                     msg += "\n" + GetText("waifu_fulfilled", target, w.Price + CurrencySign);
                 await Context.Channel.SendConfirmAsync(Context.User.Mention + msg).ConfigureAwait(false);
             }
@@ -201,7 +201,7 @@ namespace NadekoBot.Modules.Gambling
                 {
                     w = uow.Waifus.ByWaifuUserId(target.Id);
                     var now = DateTime.UtcNow;
-                    if (w?.Claimer == null || w.Claimer.UserId != Context.User.Id)
+                    if (w?.Claimer == null || w.Claimer.UserId != (long)Context.User.Id)
                         result = DivorceResult.NotYourWife;
                     else if (divorceCooldowns.AddOrUpdate(Context.User.Id,
                         now,
@@ -213,9 +213,9 @@ namespace NadekoBot.Modules.Gambling
                     {
                         amount = w.Price / 2;
 
-                        if (w.Affinity?.UserId == Context.User.Id)
+                        if (w.Affinity?.UserId == (long)Context.User.Id)
                         {
-                            await CurrencyHandler.AddCurrencyAsync(w.Waifu.UserId, "Waifu Compensation", amount, uow).ConfigureAwait(false);
+                            await CurrencyHandler.AddCurrencyAsync((ulong) w.Waifu.UserId, "Waifu Compensation", amount, uow).ConfigureAwait(false);
                             w.Price = (int)Math.Floor(w.Price * 0.75f);
                             result = DivorceResult.SucessWithPenalty;
                         }
@@ -280,7 +280,7 @@ namespace NadekoBot.Modules.Gambling
                     var w = uow.Waifus.ByWaifuUserId(Context.User.Id);
                     var newAff = u == null ? null : uow.DiscordUsers.GetOrCreate(u);
                     var now = DateTime.UtcNow;
-                    if (w?.Affinity?.UserId == u?.Id)
+                    if (w?.Affinity?.UserId == (long?)u?.Id)
                     {
                     }
                     else if (affinityCooldowns.AddOrUpdate(Context.User.Id,
@@ -401,7 +401,7 @@ namespace NadekoBot.Modules.Gambling
                     w = uow.Waifus.ByWaifuUserId(target.Id);
                     claims = uow.Waifus.ByClaimerUserId(target.Id);
                     divorces = uow._context.WaifuUpdates.Count(x => x.Old != null &&
-                        x.Old.UserId == target.Id &&
+                        x.Old.UserId == (long)target.Id &&
                         x.UpdateType == WaifuUpdateType.Claimed &&
                         x.New == null);
                     if (w == null)
@@ -494,7 +494,7 @@ namespace NadekoBot.Modules.Gambling
                 int count;
                 using (var uow = DbHandler.UnitOfWork())
                 {
-                    count = uow._context.WaifuUpdates.Count(w => w.User.UserId == userId && w.UpdateType == WaifuUpdateType.AffinityChanged);
+                    count = uow._context.WaifuUpdates.Count(w => (ulong)w.User.UserId == userId && w.UpdateType == WaifuUpdateType.AffinityChanged);
                 }
 
                 AffinityTitles title;

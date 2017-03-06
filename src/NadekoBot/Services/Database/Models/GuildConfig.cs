@@ -5,17 +5,17 @@ namespace NadekoBot.Services.Database.Models
 {
     public class GuildConfig : DbEntity
     {
-        public ulong GuildId { get; set; }
+        public long GuildId { get; set; }
         public bool DeleteMessageOnCommand { get; set; }
-        public ulong AutoAssignRoleId { get; set; }
+        public long AutoAssignRoleId { get; set; }
         //greet stuff
         public bool AutoDeleteGreetMessages { get; set; } //unused
         public bool AutoDeleteByeMessages { get; set; } // unused
         public int AutoDeleteGreetMessagesTimer { get; set; } = 30;
         public int AutoDeleteByeMessagesTimer { get; set; } = 30;
 
-        public ulong GreetMessageChannelId { get; set; }
-        public ulong ByeMessageChannelId { get; set; }
+        public long GreetMessageChannelId { get; set; }
+        public long ByeMessageChannelId { get; set; }
 
         public bool SendDmGreetMessage { get; set; }
         public string DmGreetMessageText { get; set; } = "Welcome to the %server% server, %user%!";
@@ -72,7 +72,7 @@ namespace NadekoBot.Services.Database.Models
 
     public class FilterChannelId : DbEntity
     {
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
     }
 
     public class FilteredWord : DbEntity
@@ -82,7 +82,7 @@ namespace NadekoBot.Services.Database.Models
 
     public class MutedUserId : DbEntity
     {
-        public ulong UserId { get; set; }
+        public long UserId { get; set; }
 
         public override int GetHashCode()
         {
@@ -101,7 +101,7 @@ namespace NadekoBot.Services.Database.Models
 
     public class GCChannelId : DbEntity
     {
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
 
         public override bool Equals(object obj)
         {

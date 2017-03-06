@@ -96,8 +96,8 @@ namespace NadekoBot.Modules.Searches
                             if (oldCachedStatuses.TryGetValue(newStatus.ApiLink, out oldStatus) &&
                                 oldStatus.IsLive != newStatus.IsLive)
                             {
-                                var server = NadekoBot.Client.GetGuild(fs.GuildId);
-                                var channel = server?.GetTextChannel(fs.ChannelId);
+                                var server = NadekoBot.Client.GetGuild((ulong)fs.GuildId);
+                                var channel = server?.GetTextChannel((ulong)fs.ChannelId);
                                 if (channel == null)
                                     return;
                                 try
@@ -234,7 +234,7 @@ namespace NadekoBot.Modules.Searches
 
                 var text = string.Join("\n", await Task.WhenAll(streams.Select(async snc =>
                 {
-                    var ch = await Context.Guild.GetTextChannelAsync(snc.ChannelId);
+                    var ch = await Context.Guild.GetTextChannelAsync((ulong)snc.ChannelId);
                     return string.Format("{0}'s stream on {1} channel. 【{2}】", 
                         Format.Code(snc.Username), 
                         Format.Bold(ch?.Name ?? "deleted-channel"),
@@ -254,7 +254,7 @@ namespace NadekoBot.Modules.Searches
 
                 var fs = new FollowedStream()
                 {
-                    ChannelId = Context.Channel.Id,
+                    ChannelId = (long)Context.Channel.Id,
                     Username = username,
                     Type = type
                 };
@@ -316,8 +316,8 @@ namespace NadekoBot.Modules.Searches
                 username = username.ToLowerInvariant().Trim();
                 var fs = new FollowedStream
                 {
-                    GuildId = channel.Guild.Id,
-                    ChannelId = channel.Id,
+                    GuildId = (long)channel.Guild.Id,
+                    ChannelId = (long)channel.Id,
                     Username = username,
                     Type = type,
                 };
@@ -367,7 +367,7 @@ namespace NadekoBot.Modules.Searches
 
         public static string GetText(this FollowedStream fs, string key, params object[] replacements) =>
             NadekoTopLevelModule.GetTextStatic(key,
-                NadekoBot.Localization.GetCultureInfo(fs.GuildId),
+                NadekoBot.Localization.GetCultureInfo((ulong)fs.GuildId),
                 typeof(Searches).Name.ToLowerInvariant(),
                 replacements);
 

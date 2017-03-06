@@ -19,7 +19,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
             return _set.Include(wi => wi.Waifu)
                         .Include(wi => wi.Affinity)
                         .Include(wi => wi.Claimer)
-                        .FirstOrDefault(wi => wi.Waifu.UserId == userId);
+                        .FirstOrDefault(wi => wi.Waifu.UserId == (long)userId);
         }
 
         public IList<WaifuInfo> ByClaimerUserId(ulong userId)
@@ -27,7 +27,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
             return _set.Include(wi => wi.Waifu)
                         .Include(wi => wi.Affinity)
                         .Include(wi => wi.Claimer)
-                        .Where(wi => wi.Claimer != null && wi.Claimer.UserId == userId)
+                        .Where(wi => wi.Claimer != null && wi.Claimer.UserId == (long)userId)
                         .ToList();
         }
 

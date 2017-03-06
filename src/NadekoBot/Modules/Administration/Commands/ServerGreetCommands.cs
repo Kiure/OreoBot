@@ -40,8 +40,8 @@ namespace NadekoBot.Modules.Administration
                 {
                     AutoDeleteByeMessagesTimer = g.AutoDeleteByeMessagesTimer,
                     AutoDeleteGreetMessagesTimer = g.AutoDeleteGreetMessagesTimer,
-                    GreetMessageChannelId = g.GreetMessageChannelId,
-                    ByeMessageChannelId = g.ByeMessageChannelId,
+                    GreetMessageChannelId = (ulong) g.GreetMessageChannelId,
+                    ByeMessageChannelId = (ulong) g.ByeMessageChannelId,
                     SendDmGreetMessage = g.SendDmGreetMessage,
                     DmGreetMessageText = g.DmGreetMessageText,
                     SendChannelGreetMessage = g.SendChannelGreetMessage,
@@ -61,7 +61,7 @@ namespace NadekoBot.Modules.Administration
                 NadekoBot.Client.UserLeft += UserLeft;
                 _log = LogManager.GetCurrentClassLogger();
 
-                guildConfigsCache = new ConcurrentDictionary<ulong, GreetSettings>(NadekoBot.AllGuildConfigs.ToDictionary(g => g.GuildId, GreetSettings.Create));
+                guildConfigsCache = new ConcurrentDictionary<ulong, GreetSettings>(NadekoBot.AllGuildConfigs.ToDictionary(g => (ulong)g.GuildId, GreetSettings.Create));
             }
 
             private static GreetSettings GetOrAddSettingsForGuild(ulong guildId)
@@ -274,7 +274,7 @@ namespace NadekoBot.Modules.Administration
                 {
                     var conf = uow.GuildConfigs.For(guildId, set => set);
                     enabled = conf.SendChannelGreetMessage = value ?? !conf.SendChannelGreetMessage;
-                    conf.GreetMessageChannelId = channelId;
+                    conf.GreetMessageChannelId = (long) channelId;
 
                     var toAdd = GreetSettings.Create(conf);
                     guildConfigsCache.AddOrUpdate(guildId, toAdd, (key, old) => toAdd);
@@ -423,7 +423,7 @@ namespace NadekoBot.Modules.Administration
                 {
                     var conf = uow.GuildConfigs.For(guildId, set => set);
                     enabled = conf.SendChannelByeMessage = value ?? !conf.SendChannelByeMessage;
-                    conf.ByeMessageChannelId = channelId;
+                    conf.ByeMessageChannelId = (long) channelId;
 
                     var toAdd = GreetSettings.Create(conf);
                     guildConfigsCache.AddOrUpdate(guildId, toAdd, (key, old) => toAdd);

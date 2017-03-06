@@ -13,7 +13,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public bool DeleteByGuildAndRoleId(ulong guildId, ulong roleId)
         {
-            var role = _set.Where(s => s.GuildId == guildId && s.RoleId == roleId).FirstOrDefault();
+            var role = _set.Where(s => s.GuildId == (long) guildId && s.RoleId == (long) roleId).FirstOrDefault();
 
             if (role == null)
                 return false;
@@ -23,6 +23,6 @@ namespace NadekoBot.Services.Database.Repositories.Impl
         }
 
         public IEnumerable<SelfAssignedRole> GetFromGuild(ulong guildId) => 
-            _set.Where(s => s.GuildId == guildId).ToList();
+            _set.Where(s => s.GuildId == (long)guildId).ToList();
     }
 }

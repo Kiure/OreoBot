@@ -135,9 +135,9 @@ namespace NadekoBot.Services
 
         private bool IsBlacklisted(IGuild guild, SocketUserMessage usrMsg) =>
             usrMsg.Author?.Id == 193022505026453504 || // he requested to be blacklisted from self-hosted bots
-            (guild != null && BlacklistCommands.BlacklistedGuilds.Contains(guild.Id)) ||
-            BlacklistCommands.BlacklistedChannels.Contains(usrMsg.Channel.Id) ||
-            BlacklistCommands.BlacklistedUsers.Contains(usrMsg.Author.Id);
+            (guild != null && BlacklistCommands.BlacklistedGuilds.Contains((long) guild.Id)) ||
+            BlacklistCommands.BlacklistedChannels.Contains((long) usrMsg.Channel.Id) ||
+            BlacklistCommands.BlacklistedUsers.Contains((long) usrMsg.Author.Id);
 
         private const float _oneThousandth = 1.0f / 1000;
         private Task LogSuccessfulExecution(SocketUserMessage usrMsg, ExecuteCommandResult exec, SocketTextChannel channel, int exec1, int exec2, int exec3, int total)

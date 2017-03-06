@@ -36,7 +36,7 @@ namespace NadekoBot.Modules.Permissions
             {
                 Cache = new ConcurrentDictionary<ulong, PermissionCache>(uow.GuildConfigs
                                                                        .PermissionsForAll()
-                                                                       .ToDictionary(k => k.GuildId,
+                                                                       .ToDictionary(k => (ulong)k.GuildId,
                                                                             v => new PermissionCache()
                                                                             {
                                                                                 RootPermission = v.RootPermission,
@@ -372,7 +372,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.User,
-                    PrimaryTargetId = user.Id,
+                    PrimaryTargetId = (long)user.Id,
                     SecondaryTarget = SecondaryPermissionType.Command,
                     SecondaryTargetName = command.Aliases.First().ToLowerInvariant(),
                     State = action.Value,
@@ -412,7 +412,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.User,
-                    PrimaryTargetId = user.Id,
+                    PrimaryTargetId = (long)user.Id,
                     SecondaryTarget = SecondaryPermissionType.Module,
                     SecondaryTargetName = module.Name.ToLowerInvariant(),
                     State = action.Value,
@@ -455,7 +455,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Role,
-                    PrimaryTargetId = role.Id,
+                    PrimaryTargetId = (long)role.Id,
                     SecondaryTarget = SecondaryPermissionType.Command,
                     SecondaryTargetName = command.Aliases.First().ToLowerInvariant(),
                     State = action.Value,
@@ -498,7 +498,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Role,
-                    PrimaryTargetId = role.Id,
+                    PrimaryTargetId = (long)role.Id,
                     SecondaryTarget = SecondaryPermissionType.Module,
                     SecondaryTargetName = module.Name.ToLowerInvariant(),
                     State = action.Value,
@@ -539,7 +539,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Channel,
-                    PrimaryTargetId = chnl.Id,
+                    PrimaryTargetId = (long)chnl.Id,
                     SecondaryTarget = SecondaryPermissionType.Command,
                     SecondaryTargetName = command.Aliases.First().ToLowerInvariant(),
                     State = action.Value,
@@ -579,7 +579,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Channel,
-                    PrimaryTargetId = chnl.Id,
+                    PrimaryTargetId = (long)chnl.Id,
                     SecondaryTarget = SecondaryPermissionType.Module,
                     SecondaryTargetName = module.Name.ToLowerInvariant(),
                     State = action.Value,
@@ -619,7 +619,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Channel,
-                    PrimaryTargetId = chnl.Id,
+                    PrimaryTargetId = (long)chnl.Id,
                     SecondaryTarget = SecondaryPermissionType.AllModules,
                     SecondaryTargetName = "*",
                     State = action.Value,
@@ -658,7 +658,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.Role,
-                    PrimaryTargetId = role.Id,
+                    PrimaryTargetId = (long)role.Id,
                     SecondaryTarget = SecondaryPermissionType.AllModules,
                     SecondaryTargetName = "*",
                     State = action.Value,
@@ -694,7 +694,7 @@ namespace NadekoBot.Modules.Permissions
                 var newPerm = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.User,
-                    PrimaryTargetId = user.Id,
+                    PrimaryTargetId = (long)user.Id,
                     SecondaryTarget = SecondaryPermissionType.AllModules,
                     SecondaryTargetName = "*",
                     State = action.Value,
@@ -740,7 +740,7 @@ namespace NadekoBot.Modules.Permissions
                 var allowUser = new Permission
                 {
                     PrimaryTarget = PrimaryPermissionType.User,
-                    PrimaryTargetId = Context.User.Id,
+                    PrimaryTargetId = (long)Context.User.Id,
                     SecondaryTarget = SecondaryPermissionType.AllModules,
                     SecondaryTargetName = "*",
                     State = true,

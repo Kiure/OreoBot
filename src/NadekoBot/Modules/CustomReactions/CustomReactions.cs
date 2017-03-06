@@ -34,7 +34,7 @@ namespace NadekoBot.Modules.CustomReactions
             using (var uow = DbHandler.UnitOfWork())
             {
                 var items = uow.CustomReactions.GetAll();
-                GuildReactions = new ConcurrentDictionary<ulong, CustomReaction[]>(items.Where(g => g.GuildId != null && g.GuildId != 0).GroupBy(k => k.GuildId.Value).ToDictionary(g => g.Key, g => g.ToArray()));
+                GuildReactions = new ConcurrentDictionary<ulong, CustomReaction[]>(items.Where(g => g.GuildId != null && g.GuildId != 0).GroupBy(k => (ulong)k.GuildId.Value).ToDictionary(g => g.Key, g => g.ToArray()));
                 _globalReactions = items.Where(g => g.GuildId == null || g.GuildId == 0).ToArray();
             }
             sw.Stop();
@@ -145,7 +145,7 @@ namespace NadekoBot.Modules.CustomReactions
 
             var cr = new CustomReaction()
             {
-                GuildId = channel?.Guild.Id,
+                GuildId = (long?) channel?.Guild.Id,
                 IsRegex = false,
                 Trigger = key,
                 Response = message,
@@ -331,7 +331,7 @@ namespace NadekoBot.Modules.CustomReactions
                         _globalReactions = GlobalReactions.Where(cr => cr?.Id != toDelete.Id).ToArray();
                         success = true;
                     }
-                    else if ((toDelete.GuildId != null && toDelete.GuildId != 0) && Context.Guild.Id == toDelete.GuildId)
+                    else if ((toDelete.GuildId != null && toDelete.GuildId != 0) && (long)Context.Guild.Id == toDelete.GuildId)
                     {
                         uow.CustomReactions.Remove(toDelete);
                         GuildReactions.AddOrUpdate(Context.Guild.Id, new CustomReaction[] { }, (key, old) =>

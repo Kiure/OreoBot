@@ -49,7 +49,7 @@ namespace NadekoBot.Services.Impl
         {
             _log = LogManager.GetCurrentClassLogger();
 
-            try { File.WriteAllText("./credentials_example.json", JsonConvert.SerializeObject(new CredentialsModel(), Formatting.Indented)); } catch { }
+            // try { File.WriteAllText("./credentials_example.json", JsonConvert.SerializeObject(new CredentialsModel(), Formatting.Indented)); } catch { }
             if(!File.Exists(credsFileName))
                 _log.Warn($"credentials.json is missing. Attempting to load creds from environment variables prefixed with 'NadekoBot_'. Example is in {Path.GetFullPath("./credentials_example.json")}");
             try

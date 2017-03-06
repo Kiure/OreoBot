@@ -3,6 +3,6 @@
     public class IgnoredVoicePresenceChannel : DbEntity
     {
         public LogSetting LogSetting { get; set; }
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
     }
 }

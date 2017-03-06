@@ -23,7 +23,7 @@ namespace NadekoBot.Modules.Administration
                 var log = LogManager.GetCurrentClassLogger();
 
                 autoAssignedRoles = new ConcurrentDictionary<ulong, ulong>(NadekoBot.AllGuildConfigs.Where(x => x.AutoAssignRoleId != 0)
-                    .ToDictionary(k => k.GuildId, v => v.AutoAssignRoleId));
+                    .ToDictionary(k => (ulong)k.GuildId, v => (ulong)v.AutoAssignRoleId));
                 NadekoBot.Client.UserJoined += async (user) =>
                 {
                     try
@@ -59,7 +59,7 @@ namespace NadekoBot.Modules.Administration
                     }
                     else
                     {
-                        conf.AutoAssignRoleId = role.Id;
+                        conf.AutoAssignRoleId = (long)role.Id;
                         autoAssignedRoles.AddOrUpdate(Context.Guild.Id, role.Id, (key, val) => role.Id);
                     }
 

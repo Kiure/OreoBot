@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 
 namespace NadekoBot.Services.Database.Models
 {
     public class BotConfig : DbEntity
     {
         public HashSet<BlacklistItem> Blacklist { get; set; }
-        public ulong BufferSize { get; set; } = 4000000;
+        public long BufferSize { get; set; } = 4000000;
         public bool ForwardMessages { get; set; } = true;
         public bool ForwardToAllOwners { get; set; } = true;
 
@@ -70,7 +71,7 @@ Nadeko Support Server: https://discord.gg/nadekobot";
 
     public class BlacklistItem : DbEntity
     {
-        public ulong ItemId { get; set; }
+        public long ItemId { get; set; }
         public BlacklistType Type { get; set; }
 
         public enum BlacklistType

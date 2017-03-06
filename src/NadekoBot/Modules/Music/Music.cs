@@ -661,7 +661,7 @@ namespace NadekoBot.Modules.Music
                 {
                     Name = name,
                     Author = Context.User.Username,
-                    AuthorId = Context.User.Id,
+                    AuthorId = (long)Context.User.Id,
                     Songs = songs,
                 };
                 uow.MusicPlaylists.Add(playlist);
@@ -741,7 +741,7 @@ namespace NadekoBot.Modules.Music
 
                     if (pl != null)
                     {
-                        if (NadekoBot.Credentials.IsOwner(Context.User) || pl.AuthorId == Context.User.Id)
+                        if (NadekoBot.Credentials.IsOwner(Context.User) || pl.AuthorId == (long)Context.User.Id)
                         {
                             uow.MusicPlaylists.Remove(pl);
                             await uow.CompleteAsync().ConfigureAwait(false);

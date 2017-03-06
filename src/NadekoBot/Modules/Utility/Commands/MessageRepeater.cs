@@ -43,7 +43,7 @@ namespace NadekoBot.Modules.Utility
                     Repeater = repeater;
                     Channel = channel;
 
-                    Guild = NadekoBot.Client.GetGuild(repeater.GuildId);
+                    Guild = NadekoBot.Client.GetGuild((ulong)repeater.GuildId);
                     if(Guild!=null)
                         Task.Run(Run);
                 }
@@ -77,7 +77,7 @@ namespace NadekoBot.Modules.Utility
                             try
                             {
                                 if (Channel == null)
-                                    Channel = Guild.GetTextChannel(Repeater.ChannelId);
+                                    Channel = Guild.GetTextChannel((ulong)Repeater.ChannelId);
 
                                 if (Channel != null)
                                     oldMsg = await Channel.SendMessageAsync(toSend).ConfigureAwait(false);
@@ -127,7 +127,7 @@ namespace NadekoBot.Modules.Utility
                 {
                     await Task.Delay(5000).ConfigureAwait(false);
                     Repeaters = new ConcurrentDictionary<ulong, ConcurrentQueue<RepeatRunner>>(NadekoBot.AllGuildConfigs
-                        .ToDictionary(gc => gc.GuildId,
+                        .ToDictionary(gc => (ulong)gc.GuildId,
                             gc => new ConcurrentQueue<RepeatRunner>(gc.GuildRepeaters
                                 .Select(gr => new RepeatRunner(gr))
                                 .Where(x => x.Guild != null))));
@@ -220,8 +220,8 @@ namespace NadekoBot.Modules.Utility
 
                 var toAdd = new GuildRepeater()
                 {
-                    ChannelId = Context.Channel.Id,
-                    GuildId = Context.Guild.Id,
+                    ChannelId = (long)Context.Channel.Id,
+                    GuildId = (long)Context.Guild.Id,
                     Interval = TimeSpan.FromMinutes(minutes),
                     Message = message
                 };

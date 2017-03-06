@@ -261,7 +261,7 @@ namespace NadekoBot.Modules.Gambling
             for (var i = 0; i < richest.Count; i++)
             {
                 var x = richest[i];
-                var usr = await Context.Guild.GetUserAsync(x.UserId).ConfigureAwait(false);
+                var usr = await Context.Guild.GetUserAsync((ulong)x.UserId).ConfigureAwait(false);
                 var usrStr = usr == null 
                     ? x.UserId.ToString() 
                     : usr.Username?.TrimTo(20, true);

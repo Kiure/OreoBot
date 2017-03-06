@@ -16,7 +16,7 @@ namespace NadekoBot.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AvatarId = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: true),
-                    UserId = table.Column<ulong>(nullable: false),
+                    UserId = table.Column<long>(nullable: false),
                     Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

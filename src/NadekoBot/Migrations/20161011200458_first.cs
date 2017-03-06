@@ -13,7 +13,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    BufferSize = table.Column<ulong>(nullable: false),
+                    BufferSize = table.Column<long>(nullable: false),
                     CurrencyGenerationChance = table.Column<float>(nullable: false),
                     CurrencyGenerationCooldown = table.Column<int>(nullable: false),
                     CurrencyName = table.Column<string>(nullable: true),
@@ -38,9 +38,9 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     EnemyClan = table.Column<string>(nullable: true),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     Size = table.Column<int>(nullable: false),
                     StartedAt = table.Column<DateTime>(nullable: false),
                     WarState = table.Column<int>(nullable: false)
@@ -72,7 +72,7 @@ namespace NadekoBot.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     Amount = table.Column<long>(nullable: false),
-                    UserId = table.Column<ulong>(nullable: false)
+                    UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +85,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    GuildId = table.Column<ulong>(nullable: true),
+                    GuildId = table.Column<long>(nullable: true),
                     IsRegex = table.Column<bool>(nullable: false),
                     OwnerOnly = table.Column<bool>(nullable: false),
                     Response = table.Column<string>(nullable: true),
@@ -104,7 +104,7 @@ namespace NadekoBot.Migrations
                         .Annotation("Autoincrement", true),
                     Amount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<ulong>(nullable: false)
+                    UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,7 +119,7 @@ namespace NadekoBot.Migrations
                         .Annotation("Autoincrement", true),
                     ChannelCreated = table.Column<bool>(nullable: false),
                     ChannelDestroyed = table.Column<bool>(nullable: false),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     ChannelUpdated = table.Column<bool>(nullable: false),
                     IsLogging = table.Column<bool>(nullable: false),
                     LogUserPresence = table.Column<bool>(nullable: false),
@@ -129,10 +129,10 @@ namespace NadekoBot.Migrations
                     UserBanned = table.Column<bool>(nullable: false),
                     UserJoined = table.Column<bool>(nullable: false),
                     UserLeft = table.Column<bool>(nullable: false),
-                    UserPresenceChannelId = table.Column<ulong>(nullable: false),
+                    UserPresenceChannelId = table.Column<long>(nullable: false),
                     UserUnbanned = table.Column<bool>(nullable: false),
                     UserUpdated = table.Column<bool>(nullable: false),
-                    VoicePresenceChannelId = table.Column<ulong>(nullable: false)
+                    VoicePresenceChannelId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,7 +146,7 @@ namespace NadekoBot.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     Author = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<ulong>(nullable: false),
+                    AuthorId = table.Column<long>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -162,7 +162,7 @@ namespace NadekoBot.Migrations
                         .Annotation("Autoincrement", true),
                     NextId = table.Column<int>(nullable: true),
                     PrimaryTarget = table.Column<int>(nullable: false),
-                    PrimaryTargetId = table.Column<ulong>(nullable: false),
+                    PrimaryTargetId = table.Column<long>(nullable: false),
                     SecondaryTarget = table.Column<int>(nullable: false),
                     SecondaryTargetName = table.Column<string>(nullable: true),
                     State = table.Column<bool>(nullable: false)
@@ -184,9 +184,9 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    AuthorId = table.Column<ulong>(nullable: false),
+                    AuthorId = table.Column<long>(nullable: false),
                     AuthorName = table.Column<string>(nullable: false),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     Keyword = table.Column<string>(nullable: false),
                     Text = table.Column<string>(nullable: false)
                 },
@@ -201,11 +201,11 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     IsPrivate = table.Column<bool>(nullable: false),
                     Message = table.Column<string>(nullable: true),
-                    ServerId = table.Column<ulong>(nullable: false),
-                    UserId = table.Column<ulong>(nullable: false),
+                    ServerId = table.Column<long>(nullable: false),
+                    UserId = table.Column<long>(nullable: false),
                     When = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -219,8 +219,8 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     Interval = table.Column<TimeSpan>(nullable: false),
                     Message = table.Column<string>(nullable: true)
                 },
@@ -235,8 +235,8 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    GuildId = table.Column<ulong>(nullable: false),
-                    RoleId = table.Column<ulong>(nullable: false)
+                    GuildId = table.Column<long>(nullable: false),
+                    RoleId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,7 +250,7 @@ namespace NadekoBot.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     BotConfigId = table.Column<int>(nullable: true),
-                    ItemId = table.Column<ulong>(nullable: false),
+                    ItemId = table.Column<long>(nullable: false),
                     Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -375,7 +375,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     LogSettingId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -395,7 +395,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     LogSettingId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -439,12 +439,12 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    AutoAssignRoleId = table.Column<ulong>(nullable: false),
+                    AutoAssignRoleId = table.Column<long>(nullable: false),
                     AutoDeleteByeMessages = table.Column<bool>(nullable: false),
                     AutoDeleteGreetMessages = table.Column<bool>(nullable: false),
                     AutoDeleteGreetMessagesTimer = table.Column<int>(nullable: false),
                     AutoDeleteSelfAssignedRoleMessages = table.Column<bool>(nullable: false),
-                    ByeMessageChannelId = table.Column<ulong>(nullable: false),
+                    ByeMessageChannelId = table.Column<long>(nullable: false),
                     ChannelByeMessageText = table.Column<string>(nullable: true),
                     ChannelGreetMessageText = table.Column<string>(nullable: true),
                     DefaultMusicVolume = table.Column<float>(nullable: false),
@@ -453,8 +453,8 @@ namespace NadekoBot.Migrations
                     ExclusiveSelfAssignedRoles = table.Column<bool>(nullable: false),
                     FilterInvites = table.Column<bool>(nullable: false),
                     FilterWords = table.Column<bool>(nullable: false),
-                    GreetMessageChannelId = table.Column<ulong>(nullable: false),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    GreetMessageChannelId = table.Column<long>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     LogSettingId = table.Column<int>(nullable: true),
                     PermissionRole = table.Column<string>(nullable: true),
                     RootPermissionId = table.Column<int>(nullable: true),
@@ -508,7 +508,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
                     GuildConfigId1 = table.Column<int>(nullable: true)
                 },
@@ -555,9 +555,9 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
-                    GuildId = table.Column<ulong>(nullable: false),
+                    GuildId = table.Column<long>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true)
                 },
@@ -578,7 +578,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

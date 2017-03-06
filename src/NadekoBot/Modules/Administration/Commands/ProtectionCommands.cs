@@ -82,11 +82,11 @@ namespace NadekoBot.Modules.Administration
                     if (raid != null)
                     {
                         var raidStats = new AntiRaidStats() { AntiRaidSettings = raid };
-                        _antiRaidGuilds.TryAdd(gc.GuildId, raidStats);
+                        _antiRaidGuilds.TryAdd((ulong)gc.GuildId, raidStats);
                     }
 
                     if (spam != null)
-                        _antiSpamGuilds.TryAdd(gc.GuildId, new AntiSpamStats() { AntiSpamSettings = spam });
+                        _antiSpamGuilds.TryAdd((ulong)gc.GuildId, new AntiSpamStats() { AntiSpamSettings = spam });
                 }
 
                 NadekoBot.Client.MessageReceived += (imsg) =>
@@ -106,7 +106,7 @@ namespace NadekoBot.Modules.Administration
                             if (!_antiSpamGuilds.TryGetValue(channel.Guild.Id, out spamSettings) ||
                                 spamSettings.AntiSpamSettings.IgnoredChannels.Contains(new AntiSpamIgnore()
                                 {
-                                    ChannelId = channel.Id
+                                    ChannelId = (long)channel.Id
                                 }))
                                 return;
 
@@ -361,7 +361,7 @@ namespace NadekoBot.Modules.Administration
 
                 var obj = new AntiSpamIgnore()
                 {
-                    ChannelId = channel.Id
+                    ChannelId = (long)channel.Id
                 };
                 bool added;
                 using (var uow = DbHandler.UnitOfWork())

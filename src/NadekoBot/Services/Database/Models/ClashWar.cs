@@ -21,8 +21,8 @@ namespace NadekoBot.Services.Database.Models
         public StateOfWar WarState { get; set; } = StateOfWar.Created;
         public DateTime StartedAt { get; set; }
 
-        public ulong GuildId { get; set; }
-        public ulong ChannelId { get; set; }
+        public long GuildId { get; set; }
+        public long ChannelId { get; set; }
 
         [NotMapped]
         public ITextChannel Channel { get; set; }

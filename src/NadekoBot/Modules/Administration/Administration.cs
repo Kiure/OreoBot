@@ -27,7 +27,7 @@ namespace NadekoBot.Modules.Administration
             _log = LogManager.GetCurrentClassLogger();
             NadekoBot.CommandHandler.CommandExecuted += DelMsgOnCmd_Handler;
 
-            deleteMessagesOnCommand = new ConcurrentHashSet<ulong>(NadekoBot.AllGuildConfigs.Where(g => g.DeleteMessageOnCommand).Select(g => g.GuildId));
+            deleteMessagesOnCommand = new ConcurrentHashSet<ulong>(NadekoBot.AllGuildConfigs.Where(g => g.DeleteMessageOnCommand).Select(g => (ulong)g.GuildId));
 
         }
 

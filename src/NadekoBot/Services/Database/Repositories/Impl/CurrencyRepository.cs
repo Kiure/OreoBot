@@ -13,13 +13,13 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public Currency GetOrCreate(ulong userId)
         {
-            var cur = _set.FirstOrDefault(c => c.UserId == userId);
+            var cur = _set.FirstOrDefault(c => (ulong)c.UserId == userId);
 
             if (cur == null)
             {
                 _set.Add(cur = new Currency()
                 {
-                    UserId = userId,
+                    UserId = (long) userId,
                     Amount = 0
                 });
                 _context.SaveChanges();

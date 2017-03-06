@@ -13,7 +13,7 @@ namespace NadekoBot.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     GuildConfigId = table.Column<int>(nullable: true),
-                    UserId = table.Column<ulong>(nullable: false)
+                    UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {

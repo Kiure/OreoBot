@@ -2,7 +2,7 @@
 {
     public class SelfAssignedRole : DbEntity
     {
-        public ulong GuildId { get; set; }
-        public ulong RoleId { get; set; }
+        public long GuildId { get; set; }
+        public long RoleId { get; set; }
     }
 }

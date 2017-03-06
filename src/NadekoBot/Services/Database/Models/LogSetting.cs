@@ -8,29 +8,29 @@ namespace NadekoBot.Services.Database.Models
         public HashSet<IgnoredLogChannel> IgnoredChannels { get; set; } = new HashSet<IgnoredLogChannel>();
         public HashSet<IgnoredVoicePresenceChannel> IgnoredVoicePresenceChannelIds { get; set; } = new HashSet<IgnoredVoicePresenceChannel>();
 
-        public ulong? LogOtherId { get; set; } = null;
-        public ulong? MessageUpdatedId { get; set; } = null;
-        public ulong? MessageDeletedId { get; set; } = null;
+        public long? LogOtherId { get; set; } = null;
+        public long? MessageUpdatedId { get; set; } = null;
+        public long? MessageDeletedId { get; set; } = null;
 
-        public ulong? UserJoinedId { get; set; } = null;
-        public ulong? UserLeftId { get; set; } = null;
-        public ulong? UserBannedId { get; set; } = null;
-        public ulong? UserUnbannedId { get; set; } = null;
-        public ulong? UserUpdatedId { get; set; } = null;
+        public long? UserJoinedId { get; set; } = null;
+        public long? UserLeftId { get; set; } = null;
+        public long? UserBannedId { get; set; } = null;
+        public long? UserUnbannedId { get; set; } = null;
+        public long? UserUpdatedId { get; set; } = null;
 
-        public ulong? ChannelCreatedId { get; set; } = null;
-        public ulong? ChannelDestroyedId { get; set; } = null;
-        public ulong? ChannelUpdatedId { get; set; } = null;
+        public long? ChannelCreatedId { get; set; } = null;
+        public long? ChannelDestroyedId { get; set; } = null;
+        public long? ChannelUpdatedId { get; set; } = null;
 
-        public ulong? UserMutedId { get; set; }
+        public long? UserMutedId { get; set; }
 
         //userpresence
-        public ulong? LogUserPresenceId { get; set; } = null;
+        public long? LogUserPresenceId { get; set; } = null;
 
         //voicepresence
 
-        public ulong? LogVoicePresenceId { get; set; } = null;
-        public ulong? LogVoicePresenceTTSId { get; set; } = null;
+        public long? LogVoicePresenceId { get; set; } = null;
+        public long? LogVoicePresenceTTSId { get; set; } = null;
 
 
 
@@ -44,7 +44,7 @@ namespace NadekoBot.Services.Database.Models
         /// <summary>
         /// DON'T USE
         /// </summary>
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
         /// <summary>
         /// DON'T USE
         /// </summary>
@@ -92,7 +92,7 @@ namespace NadekoBot.Services.Database.Models
         /// <summary>
         /// DON'T USE
         /// </summary>
-        public ulong UserPresenceChannelId { get; set; }
+        public long UserPresenceChannelId { get; set; }
         /// <summary>
         /// DON'T USE
         /// </summary>
@@ -100,6 +100,6 @@ namespace NadekoBot.Services.Database.Models
         /// <summary>
         /// DON'T USE
         /// </summary>
-        public ulong VoicePresenceChannelId { get; set; }
+        public long VoicePresenceChannelId { get; set; }
     }
 }

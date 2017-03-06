@@ -33,7 +33,7 @@ namespace NadekoBot.Modules.Games
                 CleverbotGuilds = new ConcurrentDictionary<ulong, Lazy<ChatterBotSession>>(
                     NadekoBot.AllGuildConfigs
                         .Where(gc => gc.CleverbotEnabled)
-                        .ToDictionary(gc => gc.GuildId, gc => new Lazy<ChatterBotSession>(() => bot.CreateSession(), true)));
+                        .ToDictionary(gc => (ulong)gc.GuildId, gc => new Lazy<ChatterBotSession>(() => bot.CreateSession(), true)));
 
                 sw.Stop();
                 _log.Debug($"Loaded in {sw.Elapsed.TotalSeconds:F2}s");

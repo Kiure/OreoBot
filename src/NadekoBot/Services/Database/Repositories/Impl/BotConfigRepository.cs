@@ -12,6 +12,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public BotConfig GetOrCreate()
         {
+            
             var config = _set.Include(bc => bc.RotatingStatusMessages)
                              .Include(bc => bc.RaceAnimals)
                              .Include(bc => bc.Blacklist)

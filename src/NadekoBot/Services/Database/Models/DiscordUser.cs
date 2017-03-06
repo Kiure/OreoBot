@@ -8,7 +8,7 @@ namespace NadekoBot.Services.Database.Models
 {
     public class DiscordUser : DbEntity
     {
-        public ulong UserId { get; set; }
+        public long UserId { get; set; }
         public string Username { get; set; }
         public string Discriminator { get; set; }
         public string AvatarId { get; set; }

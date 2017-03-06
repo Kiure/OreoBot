@@ -31,7 +31,6 @@
     "ImageSharp.Drawing.Paths": "1.0.0-alpha2-*",
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.Design": "1.1.0",
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
     "Microsoft.Extensions.Configuration": "1.1.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
@@ -52,7 +51,9 @@
     "Discord.Net.WebSocket": {
       "target": "project",
       "version": "1.0.0-*"
-    }
+    },
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
+    "System.Data.Common": "4.3.0"
   },
   "tools": {
     "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final",

@@ -25,14 +25,14 @@ namespace NadekoBot.Modules.Administration
 
             private static readonly Regex _channelNameRegex = new Regex(@"[^a-zA-Z0-9 -]", RegexOptions.Compiled);
 
-            private static readonly ConcurrentHashSet<ulong> _voicePlusTextCache;
+            private static readonly ConcurrentHashSet<long> _voicePlusTextCache;
             private static readonly ConcurrentDictionary<ulong, SemaphoreSlim> _guildLockObjects = new ConcurrentDictionary<ulong, SemaphoreSlim>();
             static VoicePlusTextCommands()
             {
                 _log = LogManager.GetCurrentClassLogger();
                 var sw = Stopwatch.StartNew();
 
-                _voicePlusTextCache = new ConcurrentHashSet<ulong>(NadekoBot.AllGuildConfigs.Where(g => g.VoicePlusTextEnabled).Select(g => g.GuildId));
+                _voicePlusTextCache = new ConcurrentHashSet<long>(NadekoBot.AllGuildConfigs.Where(g => g.VoicePlusTextEnabled).Select(g => g.GuildId));
                 NadekoBot.Client.UserVoiceStateUpdated += UserUpdatedEventHandler;
 
                 sw.Stop();
@@ -52,7 +52,7 @@ namespace NadekoBot.Modules.Administration
                 if (before.VoiceChannel == after.VoiceChannel)
                     return Task.CompletedTask;
 
-                if (!_voicePlusTextCache.Contains(guild.Id))
+                if (!_voicePlusTextCache.Contains((long) guild.Id))
                     return Task.CompletedTask;
 
                 var _ = Task.Run(async () =>
@@ -77,7 +77,7 @@ namespace NadekoBot.Modules.Administration
                             using (var uow = DbHandler.UnitOfWork())
                             {
                                 uow.GuildConfigs.For(guild.Id, set => set).VoicePlusTextEnabled = false;
-                                _voicePlusTextCache.TryRemove(guild.Id);
+                                _voicePlusTextCache.TryRemove((long) guild.Id);
                                 await uow.CompleteAsync().ConfigureAwait(false);
                             }
                             return;
@@ -192,7 +192,7 @@ namespace NadekoBot.Modules.Administration
                     }
                     if (!isEnabled)
                     {
-                        _voicePlusTextCache.TryRemove(guild.Id);
+                        _voicePlusTextCache.TryRemove((long) guild.Id);
                         foreach (var textChannel in (await guild.GetTextChannelsAsync().ConfigureAwait(false)).Where(c => c.Name.EndsWith("-voice")))
                         {
                             try { await textChannel.DeleteAsync().ConfigureAwait(false); } catch { }
@@ -207,7 +207,7 @@ namespace NadekoBot.Modules.Administration
                         await ReplyConfirmLocalized("vt_disabled").ConfigureAwait(false);
                         return;
                     }
-                    _voicePlusTextCache.Add(guild.Id);
+                    _voicePlusTextCache.Add((long) guild.Id);
                     await ReplyConfirmLocalized("vt_enabled").ConfigureAwait(false);
 
                 }

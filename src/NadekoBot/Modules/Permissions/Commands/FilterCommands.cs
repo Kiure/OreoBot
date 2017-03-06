@@ -44,17 +44,17 @@ namespace NadekoBot.Modules.Permissions
             {
                 var guildConfigs = NadekoBot.AllGuildConfigs;
 
-                InviteFilteringServers = new ConcurrentHashSet<ulong>(guildConfigs.Where(gc => gc.FilterInvites).Select(gc => gc.GuildId));
-                InviteFilteringChannels = new ConcurrentHashSet<ulong>(guildConfigs.SelectMany(gc => gc.FilterInvitesChannelIds.Select(fci => fci.ChannelId)));
+                InviteFilteringServers = new ConcurrentHashSet<ulong>(guildConfigs.Where(gc => gc.FilterInvites).Select(gc => (ulong)gc.GuildId));
+                InviteFilteringChannels = new ConcurrentHashSet<ulong>(guildConfigs.SelectMany(gc => gc.FilterInvitesChannelIds.Select(fci => (ulong)fci.ChannelId)));
 
-                var dict = guildConfigs.ToDictionary(gc => gc.GuildId, gc => new ConcurrentHashSet<string>(gc.FilteredWords.Select(fw => fw.Word)));
+                var dict = guildConfigs.ToDictionary(gc => (ulong)gc.GuildId, gc => new ConcurrentHashSet<string>(gc.FilteredWords.Select(fw => fw.Word)));
 
                 serverFilteredWords = new ConcurrentDictionary<ulong, ConcurrentHashSet<string>>(dict);
 
                 var serverFiltering = guildConfigs.Where(gc => gc.FilterWords);
-                WordFilteringServers = new ConcurrentHashSet<ulong>(serverFiltering.Select(gc => gc.GuildId));
+                WordFilteringServers = new ConcurrentHashSet<ulong>(serverFiltering.Select(gc => (ulong)gc.GuildId));
 
-                WordFilteringChannels = new ConcurrentHashSet<ulong>(guildConfigs.SelectMany(gc => gc.FilterWordsChannelIds.Select(fwci => fwci.ChannelId)));
+                WordFilteringChannels = new ConcurrentHashSet<ulong>(guildConfigs.SelectMany(gc => gc.FilterWordsChannelIds.Select(fwci => (ulong)fwci.ChannelId)));
             }
 
             [NadekoCommand, Usage, Description, Aliases]
@@ -93,12 +93,12 @@ namespace NadekoBot.Modules.Permissions
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     var config = uow.GuildConfigs.For(channel.Guild.Id, set => set.Include(gc => gc.FilterInvitesChannelIds));
-                    removed = config.FilterInvitesChannelIds.RemoveWhere(fc => fc.ChannelId == channel.Id);
+                    removed = config.FilterInvitesChannelIds.RemoveWhere(fc => fc.ChannelId == (long)channel.Id);
                     if (removed == 0)
                     {
                         config.FilterInvitesChannelIds.Add(new Services.Database.Models.FilterChannelId()
                         {
-                            ChannelId = channel.Id
+                            ChannelId = (long)channel.Id
                         });
                     }
                     await uow.CompleteAsync().ConfigureAwait(false);
@@ -151,12 +151,12 @@ namespace NadekoBot.Modules.Permissions
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     var config = uow.GuildConfigs.For(channel.Guild.Id, set => set.Include(gc => gc.FilterWordsChannelIds));
-                    removed = config.FilterWordsChannelIds.RemoveWhere(fc => fc.ChannelId == channel.Id);
+                    removed = config.FilterWordsChannelIds.RemoveWhere(fc => fc.ChannelId == (long)channel.Id);
                     if (removed == 0)
                     {
                         config.FilterWordsChannelIds.Add(new Services.Database.Models.FilterChannelId()
                         {
-                            ChannelId = channel.Id
+                            ChannelId = (long)channel.Id
                         });
                     }
                     await uow.CompleteAsync().ConfigureAwait(false);

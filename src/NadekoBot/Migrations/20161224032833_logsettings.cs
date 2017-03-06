@@ -8,77 +8,77 @@ namespace NadekoBot.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "ChannelCreatedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "ChannelDestroyedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "ChannelUpdatedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "LogOtherId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "LogUserPresenceId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "LogVoicePresenceId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "LogVoicePresenceTTSId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "MessageDeletedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "MessageUpdatedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserBannedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserJoinedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserLeftId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserMutedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserUnbannedId",
                 table: "LogSettings",
                 nullable: true);
 
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "UserUpdatedId",
                 table: "LogSettings",
                 nullable: true);

@@ -10,7 +10,7 @@ namespace NadekoBot.Services.Database.Models
         public Permission Next { get; set; } = null;
 
         public PrimaryPermissionType PrimaryTarget { get; set; }
-        public ulong PrimaryTargetId { get; set; }
+        public long PrimaryTargetId { get; set; }
 
         public SecondaryPermissionType SecondaryTarget { get; set; }
         public string SecondaryTargetName { get; set; }

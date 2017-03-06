@@ -48,7 +48,7 @@ namespace NadekoBot.Modules.Administration
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
-                    if (roles.Any(s => s.RoleId == role.Id && s.GuildId == role.Guild.Id))
+                    if (roles.Any(s => s.RoleId == (long)role.Id && s.GuildId == (long)role.Guild.Id))
                     {
                         msg = GetText("role_in_list", Format.Bold(role.Name));
                         error = true;
@@ -57,8 +57,8 @@ namespace NadekoBot.Modules.Administration
                     {
                         uow.SelfAssignedRoles.Add(new SelfAssignedRole
                         {
-                            RoleId = role.Id,
-                            GuildId = role.Guild.Id
+                            RoleId = (long)role.Id,
+                            GuildId = (long)role.Guild.Id
                         });
                         await uow.CompleteAsync();
                         msg = GetText("role_added", Format.Bold(role.Name));
@@ -105,7 +105,7 @@ namespace NadekoBot.Modules.Administration
                     
                     foreach (var roleModel in roleModels)
                     {
-                        var role = Context.Guild.Roles.FirstOrDefault(r => r.Id == roleModel.RoleId);
+                        var role = Context.Guild.Roles.FirstOrDefault(r => r.Id == (ulong)roleModel.RoleId);
                         if (role == null)
                         {
                             uow.SelfAssignedRoles.Remove(roleModel);
@@ -156,7 +156,7 @@ namespace NadekoBot.Modules.Administration
                     conf = uow.GuildConfigs.For(Context.Guild.Id, set => set);
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
                 }
-                if (roles.FirstOrDefault(r=>r.RoleId == role.Id) == null)
+                if (roles.FirstOrDefault(r=>r.RoleId == (long)role.Id) == null)
                 {
                     await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
                     return;
@@ -169,7 +169,7 @@ namespace NadekoBot.Modules.Administration
 
                 if (conf.ExclusiveSelfAssignedRoles)
                 {
-                    var sameRoleId = guildUser.RoleIds.FirstOrDefault(r => roles.Select(sar => sar.RoleId).Contains(r));
+                    var sameRoleId = guildUser.RoleIds.FirstOrDefault(r => roles.Select(sar => (ulong)sar.RoleId).Contains(r));
                     var sameRole = Context.Guild.GetRole(sameRoleId);
                     if (sameRoleId != default(ulong))
                     {
@@ -209,7 +209,7 @@ namespace NadekoBot.Modules.Administration
                     autoDeleteSelfAssignedRoleMessages = uow.GuildConfigs.For(Context.Guild.Id, set => set).AutoDeleteSelfAssignedRoleMessages;
                     roles = uow.SelfAssignedRoles.GetFromGuild(Context.Guild.Id);
                 }
-                if (roles.FirstOrDefault(r => r.RoleId == role.Id) == null)
+                if (roles.FirstOrDefault(r => r.RoleId == (long)role.Id) == null)
                 {
                     await ReplyErrorLocalized("self_assign_not").ConfigureAwait(false);
                     return;

@@ -6,6 +6,7 @@ using NadekoBot.Modules.Games.Trivia;
 using NadekoBot.Services;
 using NadekoBot.Services.Database.Models;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static NadekoBot.Services.Database.Models.BlacklistItem;
@@ -23,18 +24,18 @@ namespace NadekoBot.Modules.Permissions
         [Group]
         public class BlacklistCommands : NadekoSubmodule
         {
-            public static ConcurrentHashSet<ulong> BlacklistedUsers { get; set; }
-            public static ConcurrentHashSet<ulong> BlacklistedGuilds { get; set; }
-            public static ConcurrentHashSet<ulong> BlacklistedChannels { get; set; }
+            public static ConcurrentHashSet<long> BlacklistedUsers { get; set; }
+            public static ConcurrentHashSet<long> BlacklistedGuilds { get; set; }
+            public static ConcurrentHashSet<long> BlacklistedChannels { get; set; }
 
             static BlacklistCommands()
             {
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     var blacklist = uow.BotConfig.GetOrCreate().Blacklist;
-                    BlacklistedUsers = new ConcurrentHashSet<ulong>(blacklist.Where(bi => bi.Type == BlacklistType.User).Select(c => c.ItemId));
-                    BlacklistedGuilds = new ConcurrentHashSet<ulong>(blacklist.Where(bi => bi.Type == BlacklistType.Server).Select(c => c.ItemId));
-                    BlacklistedChannels = new ConcurrentHashSet<ulong>(blacklist.Where(bi => bi.Type == BlacklistType.Channel).Select(c => c.ItemId));
+                    BlacklistedUsers = new ConcurrentHashSet<long>(blacklist.Where(bi => bi.Type == BlacklistType.User).Select(c => c.ItemId));
+                    BlacklistedGuilds = new ConcurrentHashSet<long>( blacklist.Where(bi => bi.Type == BlacklistType.Server).Select(c => c.ItemId));
+                    BlacklistedChannels = new ConcurrentHashSet<long>(blacklist.Where(bi => bi.Type == BlacklistType.Channel).Select(c => c.ItemId));
                 }
             }
 
@@ -69,35 +70,35 @@ namespace NadekoBot.Modules.Permissions
                 {
                     if (action == AddRemove.Add)
                     {
-                        var item = new BlacklistItem { ItemId = id, Type = type };
+                        var item = new BlacklistItem { ItemId = (long)id, Type = type };
                         uow.BotConfig.GetOrCreate().Blacklist.Add(item);
                         if (type == BlacklistType.Server)
                         {
-                            BlacklistedGuilds.Add(id);
+                            BlacklistedGuilds.Add((long) id);
                         }
                         else if (type == BlacklistType.Channel)
                         {
-                            BlacklistedChannels.Add(id);
+                            BlacklistedChannels.Add((long) id);
                         }
                         else if (type == BlacklistType.User)
                         {
-                            BlacklistedUsers.Add(id);
+                            BlacklistedUsers.Add((long) id);
                         }                        
                     }
                     else
                     {
-                        uow.BotConfig.GetOrCreate().Blacklist.RemoveWhere(bi => bi.ItemId == id && bi.Type == type);
+                        uow.BotConfig.GetOrCreate().Blacklist.RemoveWhere(bi => bi.ItemId == (long) id && bi.Type == type);
                         if (type == BlacklistType.Server)
                         {
-                            BlacklistedGuilds.TryRemove(id);
+                            BlacklistedGuilds.TryRemove((long) id);
                         }
                         else if (type == BlacklistType.Channel)
                         {
-                            BlacklistedChannels.TryRemove(id);
+                            BlacklistedChannels.TryRemove((long) id);
                         }
                         else if (type == BlacklistType.User)
                         {
-                            BlacklistedUsers.TryRemove(id);
+                            BlacklistedUsers.TryRemove((long) id);
                         }
                     }
                     await uow.CompleteAsync().ConfigureAwait(false);

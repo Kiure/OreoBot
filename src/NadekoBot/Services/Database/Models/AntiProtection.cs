@@ -35,7 +35,7 @@ namespace NadekoBot.Services.Database.Models
 
     public class AntiSpamIgnore : DbEntity
     {
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
 
         public override int GetHashCode() => ChannelId.GetHashCode();
 

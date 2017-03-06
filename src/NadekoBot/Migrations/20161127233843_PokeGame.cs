@@ -12,7 +12,7 @@ namespace NadekoBot.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<ulong>(nullable: false),
+                    UserId = table.Column<long>(nullable: false),
                     type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

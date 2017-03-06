@@ -13,14 +13,14 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public Donator AddOrUpdateDonator(ulong userId, string name, int amount)
         {
-            var donator = _set.Where(d => d.UserId == userId).FirstOrDefault();
+            var donator = _set.Where(d => d.UserId == (long)userId).FirstOrDefault();
 
             if (donator == null)
             {
                 _set.Add(donator = new Donator
                 {
                     Amount = amount,
-                    UserId = userId,
+                    UserId = (long)userId,
                     Name = name
                 });
             }

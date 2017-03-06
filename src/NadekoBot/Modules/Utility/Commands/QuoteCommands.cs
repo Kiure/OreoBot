@@ -106,9 +106,9 @@ namespace NadekoBot.Modules.Utility
                 {
                     uow.Quotes.Add(new Quote
                     {
-                        AuthorId = Context.Message.Author.Id,
+                        AuthorId = (long)Context.Message.Author.Id,
                         AuthorName = Context.Message.Author.Username,
-                        GuildId = Context.Guild.Id,
+                        GuildId = (long)Context.Guild.Id,
                         Keyword = keyword,
                         Text = text,
                     });
@@ -131,7 +131,7 @@ namespace NadekoBot.Modules.Utility
                 string response;
                 using (var uow = DbHandler.UnitOfWork())
                 {
-                    var qs = uow.Quotes.GetAllQuotesByKeyword(Context.Guild.Id, keyword)?.Where(elem => isAdmin || elem.AuthorId == Context.Message.Author.Id).ToArray();
+                    var qs = uow.Quotes.GetAllQuotesByKeyword(Context.Guild.Id, keyword)?.Where(elem => isAdmin || elem.AuthorId == (long)Context.Message.Author.Id).ToArray();
 
                     if (qs == null || !qs.Any())
                     {

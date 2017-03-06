@@ -8,6 +8,7 @@ using NadekoBot.Services.Database.Models;
 using NLog;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace NadekoBot.Modules.Administration
         public class MuteCommands : NadekoSubmodule
         {
             private static ConcurrentDictionary<ulong, string> guildMuteRoles { get; }
-            private static ConcurrentDictionary<ulong, ConcurrentHashSet<ulong>> mutedUsers { get; }
+            private static ConcurrentDictionary<ulong, ConcurrentHashSet<long>> mutedUsers { get; }
 
             public static event Action<IGuildUser, MuteType> UserMuted = delegate { };
             public static event Action<IGuildUser, MuteType> UserUnmuted = delegate { };
@@ -36,11 +37,11 @@ namespace NadekoBot.Modules.Administration
                 var configs = NadekoBot.AllGuildConfigs;
                 guildMuteRoles = new ConcurrentDictionary<ulong, string>(configs
                         .Where(c => !string.IsNullOrWhiteSpace(c.MuteRoleName))
-                        .ToDictionary(c => c.GuildId, c => c.MuteRoleName));
+                        .ToDictionary(c => (ulong)c.GuildId, c => c.MuteRoleName));
 
-                mutedUsers = new ConcurrentDictionary<ulong, ConcurrentHashSet<ulong>>(configs.ToDictionary(
-                    k => k.GuildId,
-                    v => new ConcurrentHashSet<ulong>(v.MutedUsers.Select(m => m.UserId))
+                mutedUsers = new ConcurrentDictionary<ulong, ConcurrentHashSet<long>>(configs.ToDictionary(
+                    k => (ulong)k.GuildId,
+                    v => new ConcurrentHashSet<long>(v.MutedUsers.Select(m => m.UserId))
                 ));
 
                 NadekoBot.Client.UserJoined += Client_UserJoined;
@@ -50,10 +51,10 @@ namespace NadekoBot.Modules.Administration
             {
                 try
                 {
-                    ConcurrentHashSet<ulong> muted;
+                    ConcurrentHashSet<long> muted;
                     mutedUsers.TryGetValue(usr.Guild.Id, out muted);
 
-                    if (muted == null || !muted.Contains(usr.Id))
+                    if (muted == null || !muted.Contains((long) usr.Id))
                         return;
                     await MuteUser(usr).ConfigureAwait(false);
                 }
@@ -73,11 +74,11 @@ namespace NadekoBot.Modules.Administration
                     var config = uow.GuildConfigs.For(usr.Guild.Id, set => set.Include(gc => gc.MutedUsers));
                     config.MutedUsers.Add(new MutedUserId()
                     {
-                        UserId = usr.Id
+                        UserId = (long) usr.Id
                     });
-                    ConcurrentHashSet<ulong> muted;
+                    ConcurrentHashSet<long> muted;
                     if (mutedUsers.TryGetValue(usr.Guild.Id, out muted))
-                        muted.Add(usr.Id);
+                        muted.Add((long) usr.Id);
                     
                     await uow.CompleteAsync().ConfigureAwait(false);
                 }
@@ -93,11 +94,11 @@ namespace NadekoBot.Modules.Administration
                     var config = uow.GuildConfigs.For(usr.Guild.Id, set => set.Include(gc => gc.MutedUsers));
                     config.MutedUsers.Remove(new MutedUserId()
                     {
-                        UserId = usr.Id
+                        UserId = (long) usr.Id
                     });
-                    ConcurrentHashSet<ulong> muted;
+                    ConcurrentHashSet<long> muted;
                     if (mutedUsers.TryGetValue(usr.Guild.Id, out muted))
-                        muted.TryRemove(usr.Id);
+                        muted.TryRemove((long) usr.Id);
                     await uow.CompleteAsync().ConfigureAwait(false);
                 }
                 UserUnmuted(usr, MuteType.All);

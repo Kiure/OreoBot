@@ -65,17 +65,17 @@ namespace NadekoBot.Modules.Permissions
             switch (perm.PrimaryTarget)
             {
                 case PrimaryPermissionType.User:
-                    if (perm.PrimaryTargetId == message.Author.Id)
+                    if (perm.PrimaryTargetId == (long)message.Author.Id)
                         return perm.State;
                     break;
                 case PrimaryPermissionType.Channel:
-                    if (perm.PrimaryTargetId == message.Channel.Id)
+                    if (perm.PrimaryTargetId == (long)message.Channel.Id)
                         return perm.State;
                     break;
                 case PrimaryPermissionType.Role:        
                     if (guildUser == null)
                         break;
-                    if (guildUser.RoleIds.Contains(perm.PrimaryTargetId))
+                    if (guildUser.RoleIds.Contains((ulong)perm.PrimaryTargetId))
                         return perm.State;
                     break;
                 case PrimaryPermissionType.Server:
@@ -125,7 +125,7 @@ namespace NadekoBot.Modules.Permissions
                     if (guild == null)
                         com += $"<@{perm.PrimaryTargetId}>";
                     else
-                        com += guild.GetUser(perm.PrimaryTargetId).ToString() ?? $"<@{perm.PrimaryTargetId}>";
+                        com += guild.GetUser((ulong)perm.PrimaryTargetId).ToString() ?? $"<@{perm.PrimaryTargetId}>";
                     break;
                 case PrimaryPermissionType.Channel:
                     com += $"<#{perm.PrimaryTargetId}>";
@@ -134,7 +134,7 @@ namespace NadekoBot.Modules.Permissions
                     if(guild == null)
                         com += $"<@&{perm.PrimaryTargetId}>";
                     else
-                        com += guild.GetRole(perm.PrimaryTargetId).ToString() ?? $"<@{perm.PrimaryTargetId}>";
+                        com += guild.GetRole((ulong)perm.PrimaryTargetId).ToString() ?? $"<@{perm.PrimaryTargetId}>";
                     break;
                 case PrimaryPermissionType.Server:
                     break;

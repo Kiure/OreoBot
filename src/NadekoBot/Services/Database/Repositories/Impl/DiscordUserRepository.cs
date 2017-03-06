@@ -19,14 +19,14 @@ namespace NadekoBot.Services.Database.Repositories.Impl
         {
             DiscordUser toReturn;
 
-            toReturn = _set.FirstOrDefault(u => u.UserId == original.Id);
+            toReturn = _set.FirstOrDefault(u => u.UserId == (long)original.Id);
 
             if (toReturn == null)
                 _set.Add(toReturn = new DiscordUser()
                 {
                     AvatarId = original.AvatarId,
                     Discriminator = original.Discriminator,
-                    UserId = original.Id,
+                    UserId = (long)original.Id,
                     Username = original.Username,
                 });
 

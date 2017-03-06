@@ -2,10 +2,10 @@
 {
     public class FollowedStream : DbEntity
     {
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
         public string Username { get; set; }
         public FollowedStreamType Type { get; set; }
-        public ulong GuildId { get; set; }
+        public long GuildId { get; set; }
 
         public enum FollowedStreamType
         {

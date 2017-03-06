@@ -64,11 +64,11 @@ namespace NadekoBot.Modules.Utility
                     IMessageChannel ch;
                     if (r.IsPrivate)
                     {
-                        ch = await NadekoBot.Client.GetDMChannelAsync(r.ChannelId).ConfigureAwait(false);
+                        ch = await NadekoBot.Client.GetDMChannelAsync((ulong)r.ChannelId).ConfigureAwait(false);
                     }
                     else
                     {
-                        ch = NadekoBot.Client.GetGuild(r.ServerId)?.GetTextChannel(r.ChannelId);
+                        ch = NadekoBot.Client.GetGuild((ulong)r.ServerId)?.GetTextChannel((ulong)r.ChannelId);
                     }
                     if (ch == null)
                         return;
@@ -163,12 +163,12 @@ namespace NadekoBot.Modules.Utility
 
                 var rem = new Reminder
                 {
-                    ChannelId = ch.Id,
+                    ChannelId = (long)ch.Id,
                     IsPrivate = ch is IDMChannel,
                     When = time,
                     Message = message,
-                    UserId = Context.User.Id,
-                    ServerId = channel.Guild.Id
+                    UserId = (long)Context.User.Id,
+                    ServerId = (long)channel.Guild.Id
                 };
 
                 using (var uow = DbHandler.UnitOfWork())

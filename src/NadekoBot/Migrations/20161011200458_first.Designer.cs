@@ -23,7 +23,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<int?>("BotConfigId");
 
-                    b.Property<ulong>("ItemId");
+                    b.Property<long>("ItemId");
 
                     b.Property<int>("Type");
 
@@ -39,7 +39,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("BufferSize");
+                    b.Property<long>("BufferSize");
 
                     b.Property<float>("CurrencyGenerationChance");
 
@@ -97,11 +97,11 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<string>("EnemyClan");
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
                     b.Property<int>("Size");
 
@@ -155,7 +155,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<long>("Amount");
 
-                    b.Property<ulong>("UserId");
+                    b.Property<long>("UserId");
 
                     b.HasKey("Id");
 
@@ -170,7 +170,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong?>("GuildId");
+                    b.Property<long?>("GuildId");
 
                     b.Property<bool>("IsRegex");
 
@@ -194,7 +194,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<ulong>("UserId");
+                    b.Property<long>("UserId");
 
                     b.HasKey("Id");
 
@@ -225,7 +225,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<int?>("GuildConfigId");
 
@@ -261,11 +261,11 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<int?>("GuildConfigId");
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
                     b.Property<int>("Type");
 
@@ -283,7 +283,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<int?>("GuildConfigId");
 
@@ -299,7 +299,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("AutoAssignRoleId");
+                    b.Property<long>("AutoAssignRoleId");
 
                     b.Property<bool>("AutoDeleteByeMessages");
 
@@ -309,7 +309,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<bool>("AutoDeleteSelfAssignedRoleMessages");
 
-                    b.Property<ulong>("ByeMessageChannelId");
+                    b.Property<long>("ByeMessageChannelId");
 
                     b.Property<string>("ChannelByeMessageText");
 
@@ -327,9 +327,9 @@ namespace NadekoBot.Migrations
 
                     b.Property<bool>("FilterWords");
 
-                    b.Property<ulong>("GreetMessageChannelId");
+                    b.Property<long>("GreetMessageChannelId");
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
                     b.Property<int?>("LogSettingId");
 
@@ -364,7 +364,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<int?>("LogSettingId");
 
@@ -380,7 +380,7 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<int?>("LogSettingId");
 
@@ -400,7 +400,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<bool>("ChannelDestroyed");
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<bool>("ChannelUpdated");
 
@@ -420,13 +420,13 @@ namespace NadekoBot.Migrations
 
                     b.Property<bool>("UserLeft");
 
-                    b.Property<ulong>("UserPresenceChannelId");
+                    b.Property<long>("UserPresenceChannelId");
 
                     b.Property<bool>("UserUnbanned");
 
                     b.Property<bool>("UserUpdated");
 
-                    b.Property<ulong>("VoicePresenceChannelId");
+                    b.Property<long>("VoicePresenceChannelId");
 
                     b.HasKey("Id");
 
@@ -458,7 +458,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<string>("Author");
 
-                    b.Property<ulong>("AuthorId");
+                    b.Property<long>("AuthorId");
 
                     b.Property<string>("Name");
 
@@ -476,7 +476,7 @@ namespace NadekoBot.Migrations
 
                     b.Property<int>("PrimaryTarget");
 
-                    b.Property<ulong>("PrimaryTargetId");
+                    b.Property<long>("PrimaryTargetId");
 
                     b.Property<int>("SecondaryTarget");
 
@@ -537,12 +537,12 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("AuthorId");
+                    b.Property<long>("AuthorId");
 
                     b.Property<string>("AuthorName")
                         .IsRequired();
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
                     b.Property<string>("Keyword")
                         .IsRequired();
@@ -578,15 +578,15 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
                     b.Property<bool>("IsPrivate");
 
                     b.Property<string>("Message");
 
-                    b.Property<ulong>("ServerId");
+                    b.Property<long>("ServerId");
 
-                    b.Property<ulong>("UserId");
+                    b.Property<long>("UserId");
 
                     b.Property<DateTime>("When");
 
@@ -600,9 +600,9 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("ChannelId");
+                    b.Property<long>("ChannelId");
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
                     b.Property<TimeSpan>("Interval");
 
@@ -621,9 +621,9 @@ namespace NadekoBot.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<ulong>("GuildId");
+                    b.Property<long>("GuildId");
 
-                    b.Property<ulong>("RoleId");
+                    b.Property<long>("RoleId");
 
                     b.HasKey("Id");
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NadekoBot.Migrations;
 using NadekoBot.Services.Database;
 
 namespace NadekoBot.Services
@@ -9,7 +11,7 @@ namespace NadekoBot.Services
     {
         private static DbHandler _instance = null;
         public static DbHandler Instance = _instance ?? (_instance = new DbHandler());
-        private readonly DbContextOptions options;
+        private readonly DbContextOptions<NadekoContext> options;
 
         private string connectionString { get; }
 
@@ -18,8 +20,9 @@ namespace NadekoBot.Services
         private DbHandler()
         {
             connectionString = NadekoBot.Credentials.Db.ConnectionString;
-            var optionsBuilder = new DbContextOptionsBuilder();
-            optionsBuilder.UseSqlite(NadekoBot.Credentials.Db.ConnectionString);
+            var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
+            //optionsBuilder.UseSqlite(NadekoBot.Credentials.Db.ConnectionString);
+            optionsBuilder.UseSqlServer(connectionString);
             options = optionsBuilder.Options;
             //switch (NadekoBot.Credentials.Db.Type.ToUpperInvariant())
             //{
@@ -35,13 +38,14 @@ namespace NadekoBot.Services
             //}
         }
 
+
         public NadekoContext GetDbContext()
         {
             var context = new NadekoContext(options);
             context.Database.Migrate();
             context.EnsureSeedData();
-
             return context;
+            
         }
 
         private IUnitOfWork GetUnitOfWork() =>

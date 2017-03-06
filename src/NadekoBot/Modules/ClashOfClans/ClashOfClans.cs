@@ -30,12 +30,12 @@ namespace NadekoBot.Modules.ClashOfClans
                         .GetAllWars()
                         .Select(cw =>
                         {
-                            cw.Channel = NadekoBot.Client.GetGuild(cw.GuildId)?
-                                                         .GetTextChannel(cw.ChannelId);
+                            cw.Channel = NadekoBot.Client.GetGuild((ulong) cw.GuildId)?
+                                                         .GetTextChannel((ulong)cw.ChannelId);
                             return cw;
                         })
                         .Where(cw => cw.Channel != null)
-                        .GroupBy(cw => cw.GuildId)
+                        .GroupBy(cw => (ulong)cw.GuildId)
                         .ToDictionary(g => g.Key, g => g.ToList()));
             }
 
@@ -322,8 +322,8 @@ namespace NadekoBot.Modules.ClashOfClans
                     EnemyClan = enemyClan,
                     Size = size,
                     Bases = new List<ClashCaller>(size),
-                    GuildId = serverId,
-                    ChannelId = channelId,
+                    GuildId = (long)serverId,
+                    ChannelId = (long)channelId,
                     Channel = channel,
                 };
                 cw.Bases.Capacity = size;

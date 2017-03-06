@@ -14,7 +14,7 @@ namespace NadekoBot.Migrations
                         .Annotation("Autoincrement", true),
                     Amount = table.Column<long>(nullable: false),
                     Reason = table.Column<string>(nullable: true),
-                    UserId = table.Column<ulong>(nullable: false)
+                    UserId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
