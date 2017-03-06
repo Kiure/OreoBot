@@ -93,4 +93,4 @@ Change the variables below
 - Enjoy!
 
 ### Video How to Setup
-[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=GqBUk1qZ-DE)
+[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=GBi3_s2NujA)
