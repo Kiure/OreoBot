@@ -40,7 +40,7 @@ lolapikey=""
 mashapekey=""
 osu=""
 scid=""
-connection=""
+connection="Data Source=;Initial Catalog=;User ID=;Password="
 
 echo "{
   \"ClientId\": $clientid,
