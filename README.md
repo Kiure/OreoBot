@@ -25,6 +25,7 @@ Clone the repository
 ### Setting up the nadeko_run.sh
 - Edit the nadeko_run.sh file in script folder.
 Change the variables below
+	<br />
     ```
     clientid=""
     botid=""
@@ -37,12 +38,14 @@ Change the variables below
     scid=""
     connection="Data Source=;Initial Catalog=;User ID=;Password="
     ```
+	<br />
 - Move the nadeko_run.sh and Procfile to the root folder.
 
 ### Setting up the Heroku
 - Log in your heroku account
 - Create a new app
 - Add the buildpacks
+	<br />
     ```
     https://github.com/ScarletKuro/nadeko-dotnetcore-buildpack
     ```
