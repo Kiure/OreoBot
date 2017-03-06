@@ -13,12 +13,15 @@
 
 ## Setting Up NadekoBot on Heroku
 Clone the repository
+
 `git clone -b master --recursive --depth 1 --progress https://github.com/ScarletKuro/NadekoBot.git`
+
 ### Setting up the Database
 - Open the Microsoft SQL Server Managment Studio.
 - Connect to your SqlServer databse, i have already did that.
 - Create a new database, for example db_Nadekobot.
 - Execute the SqlServer.sql script that locates in scheme folder.
+
 ### Setting up the nadeko_run.sh
 - Edit the nadeko_run.sh file in script folder.
 Change the variables below
