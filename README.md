@@ -28,14 +28,41 @@ Change the variables below
 	<br />
     ```
     clientid=""
+	```
+	<br />
+	```
     botid=""
+	```
+	<br />
+	```
     token=""
+	```
+	<br />
+	```
     ownerid=""
+	```
+	<br />
+	```
     googleapi=""
+	```
+	<br />
+	```
     lolapikey=""
+	```
+	<br />
+	```
     mashapekey=""
+	```
+	<br />
+	```
     osu=""
+	```
+	<br />
+	```
     scid=""
+	```
+	<br />
+	```
     connection="Data Source=;Initial Catalog=;User ID=;Password="
     ```
 	<br />
