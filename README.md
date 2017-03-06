@@ -46,12 +46,15 @@ Change the variables below
     ```
     https://github.com/ScarletKuro/nadeko-dotnetcore-buildpack
     ```
+	<br />
     ```
     https://ingmferrer@bitbucket.org/ingmferrer/opus-buildpack.git
     ```
+	<br />
     ```
     https://github.com/challengee/heroku-buildpack-libsodium.git
     ```
+	<br />
     ```
     https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
     ```
