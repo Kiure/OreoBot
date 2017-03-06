@@ -52,3 +52,6 @@ Change the variables below
 - Deploy now the Nadeko using DropBox, Heroku CLI or Github
 - Turn the Dyno on after the build is complete
 - Enjoy!
+
+### Video How to Setup
+[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=GqBUk1qZ-DE)
