@@ -73,7 +73,7 @@ Change the variables below
     connection="Data Source=;Initial Catalog=;User ID=;Password="
     ```
     **NB!** If you are using a domain name to connect to database take a note that some domain names may require a **www** prefix and some doesn't to connect to the database.
-	*For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.*
+	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.
 - Move the nadeko_run.sh and Procfile to the root folder.<br />
 ![ScreenShot](http://i.imgur.com/RxQ6QtH.png)
 
