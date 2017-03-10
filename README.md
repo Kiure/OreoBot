@@ -5,6 +5,10 @@
 [![nadeko1](https://cdn.discordapp.com/attachments/266240393639755778/281920134967328768/part2.png)](https://discordapp.com/oauth2/authorize?client_id=170254782546575360&scope=bot&permissions=66186303)
 [![nadeko2](https://cdn.discordapp.com/attachments/266240393639755778/281920161311883264/part3.png)](http://nadekobot.readthedocs.io/en/latest/Commands%20List/)
 
+## Explanation
+Before you continue, notice that this nadeko uses **Microsoft SQL Server** and you need to have your **own** SQL Server since heroku doesn't provide any.
+Why it uses MSSQL instead of the buildin SQLite? The answer is because of heroku's [**ephemeral filesystem**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
+
 ## For Update, Help and Guidelines
 
 | [![twitter](https://cdn.discordapp.com/attachments/155726317222887425/252192520094613504/twiter_banner.JPG)](https://twitter.com/TheNadekoBot) | [![discord](https://cdn.discordapp.com/attachments/266240393639755778/281920766490968064/discord.png)](https://discord.gg/nadekobot) | [![Wiki](https://cdn.discordapp.com/attachments/266240393639755778/281920793330581506/datcord.png)](http://nadekobot.readthedocs.io/en/latest/)
@@ -16,9 +20,12 @@ Clone the repository
 
 `git clone -b master --recursive --depth 1 --progress https://github.com/ScarletKuro/NadekoBot.git`
 
+**NB!** Before you proceed, remove the .git folder from NadekoBot folded after u clone the repository.
+
 ### Setting up the Database
+- If you don't have any SQL Server, you can temporary use [gearhost](https://www.gearhost.com/). Remember that it has *limited data-size*.
 - Open the Microsoft SQL Server Managment Studio.
-- Connect to your SqlServer databse, i have already did that.
+- Connect to your SqlServer databse.
 - Create a new database, for example db_Nadekobot.
 - Execute the SqlServer.sql script that locates in scheme folder.
 
@@ -66,8 +73,13 @@ Change the variables below
     connection="Data Source=;Initial Catalog=;User ID=;Password="
     ```
 	<br />
-- Move the nadeko_run.sh and Procfile to the root folder.
-
+	`
+    NB! If you are using a domain name to connect to database take a note that some domain names may require a *www* prefix and some doesn't to connect to the database.
+	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.
+    `
+	<br />
+- Move the nadeko_run.sh and Procfile to the root folder.<br />
+![ScreenShot](http://i.imgur.com/RxQ6QtH.png)
 ### Setting up the Heroku
 - Log in your heroku account
 - Create a new app
