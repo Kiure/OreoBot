@@ -7,7 +7,7 @@
 
 ## Explanation
 Before you continue, notice that this nadeko uses **Microsoft SQL Server** and you need to have your **own** SQL Server since heroku doesn't provide any.
-Why it uses MSSQL instead of the buildin SQLite? The answer is because of heroku's [**ephemeral filesystem**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
+Why it uses MSSQL instead of the buildin SQLite? The answer is because of heroku's [**ephemeral filesystem.**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
 
 ## For Update, Help and Guidelines
 
@@ -73,13 +73,14 @@ Change the variables below
     connection="Data Source=;Initial Catalog=;User ID=;Password="
     ```
 	<br />
-	`
+	
     NB! If you are using a domain name to connect to database take a note that some domain names may require a *www* prefix and some doesn't to connect to the database.
 	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.
-    `
+    
 	<br />
 - Move the nadeko_run.sh and Procfile to the root folder.<br />
 ![ScreenShot](http://i.imgur.com/RxQ6QtH.png)
+
 ### Setting up the Heroku
 - Log in your heroku account
 - Create a new app
