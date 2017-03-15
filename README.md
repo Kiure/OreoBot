@@ -82,21 +82,21 @@ Change the variables below
 - Create a new app
 - Add the buildpacks
 	<br />
-    ```
+    `
     https://github.com/ScarletKuro/nadeko-dotnetcore-buildpack
-    ```
+    `
 	<br />
-    ```
+    `
     https://ingmferrer@bitbucket.org/ingmferrer/opus-buildpack.git
-    ```
+    `
 	<br />
-    ```
+    `
     https://github.com/challengee/heroku-buildpack-libsodium.git
-    ```
+    `
 	<br />
-    ```
+    `
     https://github.com/ScarletKuro/heroku-buildpack-ffmpeg-static
-    ```
+    `
 - Deploy now the Nadeko using DropBox, Heroku CLI or Github
 - Turn the Dyno on after the build is complete
 - Enjoy!
