@@ -1,5 +1,16 @@
 #!/bin/sh
-echo "NadekoBot 1.0"
+clientid=""
+botid=""
+token=""
+ownerid=""
+googleapi=""
+lolapikey=""
+mashapekey=""
+osu=""
+scid=""
+connection="Data Source=;Initial Catalog=;User ID=;Password="
+
+echo "NadekoBot 1.2"
 
 if hash dotnet 2>/dev/null
 then
@@ -30,17 +41,6 @@ echo ""
 echo "Installation Complete."
 
 echo "Creating a new credentials.json"
-
-clientid=""
-botid=""
-token=""
-ownerid=""
-googleapi=""
-lolapikey=""
-mashapekey=""
-osu=""
-scid=""
-connection="Data Source=;Initial Catalog=;User ID=;Password="
 
 echo "{
   \"ClientId\": $clientid,
