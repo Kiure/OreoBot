@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -13,7 +14,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Action = table.Column<int>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: false),
                     Seconds = table.Column<int>(nullable: false),
@@ -35,7 +36,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Action = table.Column<int>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: false),
                     MessageThreshold = table.Column<int>(nullable: false)
@@ -56,7 +57,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AntiSpamSettingId = table.Column<int>(nullable: true),
                     ChannelId = table.Column<long>(nullable: false)
                 },

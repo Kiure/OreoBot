@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
 {
@@ -11,7 +12,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<long>(nullable: false),
                     Reason = table.Column<string>(nullable: true),
                     UserId = table.Column<long>(nullable: false)

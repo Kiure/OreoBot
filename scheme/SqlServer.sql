@@ -675,3 +675,74 @@ GO
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20170222162505_dateadded', N'1.1.0-rtm-22752');
 GO
+CREATE TABLE [Permissionv2] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [Index] int NOT NULL,
+    [PrimaryTarget] int NOT NULL,
+    [PrimaryTargetId] bigint NOT NULL,
+    [SecondaryTarget] int NOT NULL,
+    [SecondaryTargetName] nvarchar(max),
+    [State] bit NOT NULL,
+    CONSTRAINT [PK_Permissionv2] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Permissionv2_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_Permissionv2_GuildConfigId] ON [Permissionv2] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170308033058_permsv2', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [UnmuteTimer] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [UnmuteAt] datetime2 NOT NULL,
+    [UserId] bigint NOT NULL,
+    CONSTRAINT [PK_UnmuteTimer] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UnmuteTimer_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_UnmuteTimer_GuildConfigId] ON [UnmuteTimer] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170310210952_unmute-timers', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [VcRoleInfo] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [RoleId] bigint NOT NULL,
+    [VoiceChannelId] bigint NOT NULL,
+    CONSTRAINT [PK_VcRoleInfo] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_VcRoleInfo_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_VcRoleInfo_GuildConfigId] ON [VcRoleInfo] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170311054632_vcrole', N'1.1.0-rtm-22752');
+GO
+ALTER TABLE [CustomReactions] ADD [AutoDeleteTrigger] bit NOT NULL DEFAULT 0;
+GO
+ALTER TABLE [CustomReactions] ADD [DmResponse] bit NOT NULL DEFAULT 0;
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170318190018_crad-and-crdm', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [CommandAlias] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [Mapping] nvarchar(max),
+    [Trigger] nvarchar(max),
+    CONSTRAINT [PK_CommandAlias] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_CommandAlias_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_CommandAlias_GuildConfigId] ON [CommandAlias] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170320090138_command-aliasing', N'1.1.0-rtm-22752');
+GO

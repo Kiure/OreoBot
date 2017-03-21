@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -12,7 +13,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BufferSize = table.Column<long>(nullable: false),
                     CurrencyGenerationChance = table.Column<float>(nullable: false),
                     CurrencyGenerationCooldown = table.Column<int>(nullable: false),
@@ -37,7 +38,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     EnemyClan = table.Column<string>(nullable: true),
                     GuildId = table.Column<long>(nullable: false),
@@ -55,7 +56,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     InternalTrigger = table.Column<string>(nullable: true),
                     Modifier = table.Column<decimal>(nullable: false),
                     UnitType = table.Column<string>(nullable: true)
@@ -70,7 +71,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<long>(nullable: false),
                     UserId = table.Column<long>(nullable: false)
                 },
@@ -84,7 +85,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GuildId = table.Column<long>(nullable: true),
                     IsRegex = table.Column<bool>(nullable: false),
                     OwnerOnly = table.Column<bool>(nullable: false),
@@ -101,7 +102,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     UserId = table.Column<long>(nullable: false)
@@ -116,7 +117,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelCreated = table.Column<bool>(nullable: false),
                     ChannelDestroyed = table.Column<bool>(nullable: false),
                     ChannelId = table.Column<long>(nullable: false),
@@ -144,7 +145,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Author = table.Column<string>(nullable: true),
                     AuthorId = table.Column<long>(nullable: false),
                     Name = table.Column<string>(nullable: true)
@@ -159,7 +160,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NextId = table.Column<int>(nullable: true),
                     PrimaryTarget = table.Column<int>(nullable: false),
                     PrimaryTargetId = table.Column<long>(nullable: false),
@@ -183,7 +184,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<long>(nullable: false),
                     AuthorName = table.Column<string>(nullable: false),
                     GuildId = table.Column<long>(nullable: false),
@@ -200,7 +201,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     IsPrivate = table.Column<bool>(nullable: false),
                     Message = table.Column<string>(nullable: true),
@@ -218,7 +219,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     GuildId = table.Column<long>(nullable: false),
                     Interval = table.Column<TimeSpan>(nullable: false),
@@ -234,7 +235,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GuildId = table.Column<long>(nullable: false),
                     RoleId = table.Column<long>(nullable: false)
                 },
@@ -248,7 +249,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     ItemId = table.Column<long>(nullable: false),
                     Type = table.Column<int>(nullable: false)
@@ -269,7 +270,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     Text = table.Column<string>(nullable: true)
                 },
@@ -289,7 +290,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     ModuleName = table.Column<string>(nullable: true),
                     Prefix = table.Column<string>(nullable: true)
@@ -310,7 +311,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     Status = table.Column<string>(nullable: true)
                 },
@@ -330,7 +331,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     Icon = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
@@ -351,7 +352,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BaseDestroyed = table.Column<bool>(nullable: false),
                     CallUser = table.Column<string>(nullable: true),
                     ClashWarId = table.Column<int>(nullable: false),
@@ -374,7 +375,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     LogSettingId = table.Column<int>(nullable: true)
                 },
@@ -394,7 +395,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     LogSettingId = table.Column<int>(nullable: true)
                 },
@@ -414,7 +415,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MusicPlaylistId = table.Column<int>(nullable: true),
                     Provider = table.Column<string>(nullable: true),
                     ProviderType = table.Column<int>(nullable: false),
@@ -438,7 +439,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AutoAssignRoleId = table.Column<long>(nullable: false),
                     AutoDeleteByeMessages = table.Column<bool>(nullable: false),
                     AutoDeleteGreetMessages = table.Column<bool>(nullable: false),
@@ -486,7 +487,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CommandName = table.Column<string>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true),
                     Seconds = table.Column<int>(nullable: false)
@@ -507,7 +508,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
                     GuildConfigId1 = table.Column<int>(nullable: true)
@@ -534,7 +535,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GuildConfigId = table.Column<int>(nullable: true),
                     Word = table.Column<string>(nullable: true)
                 },
@@ -554,7 +555,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
                     GuildId = table.Column<long>(nullable: false),
@@ -577,7 +578,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChannelId = table.Column<long>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true)
                 },

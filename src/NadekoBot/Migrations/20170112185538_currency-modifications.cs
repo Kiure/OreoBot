@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -55,7 +56,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
                     CommandName = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false)

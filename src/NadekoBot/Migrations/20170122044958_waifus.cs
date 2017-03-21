@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -13,7 +14,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AvatarId = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: true),
                     UserId = table.Column<long>(nullable: false),
@@ -30,7 +31,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AffinityId = table.Column<int>(nullable: true),
                     ClaimerId = table.Column<int>(nullable: true),
                     Price = table.Column<int>(nullable: false),
@@ -64,7 +65,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NewId = table.Column<int>(nullable: true),
                     OldId = table.Column<int>(nullable: true),
                     UpdateType = table.Column<int>(nullable: false),
