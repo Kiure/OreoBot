@@ -787,53 +787,53 @@ namespace NadekoBot.Modules.Administration
 
             private static async Task<ITextChannel> TryGetLogChannel(IGuild guild, LogSetting logSetting, LogType logChannelType)
             {
-                ulong? id = null;
+               long? id = null;
                 switch (logChannelType)
                 {
                     case LogType.Other:
-                        id = (ulong?) logSetting.LogOtherId;
+                        id = logSetting.LogOtherId;
                         break;
                     case LogType.MessageUpdated:
-                        id = (ulong?) logSetting.MessageUpdatedId;
+                        id = logSetting.MessageUpdatedId;
                         break;
                     case LogType.MessageDeleted:
-                        id = (ulong?) logSetting.MessageDeletedId;
+                        id = logSetting.MessageDeletedId;
                         break;
                     case LogType.UserJoined:
-                        id = (ulong?) logSetting.UserJoinedId;
+                        id = logSetting.UserJoinedId;
                         break;
                     case LogType.UserLeft:
-                        id = (ulong?) logSetting.UserLeftId;
+                        id = logSetting.UserLeftId;
                         break;
                     case LogType.UserBanned:
-                        id = (ulong?)logSetting.UserBannedId;
+                        id = logSetting.UserBannedId;
                         break;
                     case LogType.UserUnbanned:
-                        id = (ulong?)logSetting.UserUnbannedId;
+                        id = logSetting.UserUnbannedId;
                         break;
                     case LogType.UserUpdated:
-                        id = (ulong?)logSetting.UserUpdatedId;
+                        id = logSetting.UserUpdatedId;
                         break;
                     case LogType.ChannelCreated:
-                        id = (ulong?)logSetting.ChannelCreatedId;
+                        id = logSetting.ChannelCreatedId;
                         break;
                     case LogType.ChannelDestroyed:
-                        id = (ulong?)logSetting.ChannelDestroyedId;
+                        id = logSetting.ChannelDestroyedId;
                         break;
                     case LogType.ChannelUpdated:
-                        id = (ulong?)logSetting.ChannelUpdatedId;
+                        id = logSetting.ChannelUpdatedId;
                         break;
                     case LogType.UserPresence:
-                        id = (ulong?)logSetting.LogUserPresenceId;
+                        id = logSetting.LogUserPresenceId;
                         break;
                     case LogType.VoicePresence:
-                        id = (ulong?)logSetting.LogVoicePresenceId;
+                        id = logSetting.LogVoicePresenceId;
                         break;
                     case LogType.VoicePresenceTTS:
-                        id = (ulong?)logSetting.LogVoicePresenceTTSId;
+                        id = logSetting.LogVoicePresenceTTSId;
                         break;
                     case LogType.UserMuted:
-                        id = (ulong?)logSetting.UserMutedId;
+                        id = logSetting.UserMutedId;
                         break;
                 }
 
@@ -842,7 +842,7 @@ namespace NadekoBot.Modules.Administration
                     UnsetLogSetting(guild.Id, logChannelType);
                     return null;
                 }
-                var channel = await guild.GetTextChannelAsync(id.Value).ConfigureAwait(false);
+                var channel = await guild.GetTextChannelAsync((ulong) id.Value).ConfigureAwait(false);
 
                 if (channel == null)
                 {
@@ -943,7 +943,7 @@ namespace NadekoBot.Modules.Administration
                     logSetting.LogUserPresenceId =
                     logSetting.LogVoicePresenceId =
                     logSetting.UserMutedId =
-                    logSetting.LogVoicePresenceTTSId = (long?) (action.Value ? channel.Id : (ulong?)null);
+                    logSetting.LogVoicePresenceTTSId = (action.Value ? (long) channel.Id : (long?)null);
 
                     await uow.CompleteAsync().ConfigureAwait(false);
                 }
@@ -1000,7 +1000,7 @@ namespace NadekoBot.Modules.Administration
             public async Task Log(LogType type)
             {
                 var channel = (ITextChannel)Context.Channel;
-                ulong? channelId = null;
+                long? channelId = null;
                 using (var uow = DbHandler.UnitOfWork())
                 {
                     var logSetting = uow.GuildConfigs.LogSettingsFor(channel.Guild.Id).LogSetting;
@@ -1008,49 +1008,49 @@ namespace NadekoBot.Modules.Administration
                     switch (type)
                     {
                         case LogType.Other:
-                            channelId = (ulong?) (logSetting.LogOtherId = (long?) (logSetting.LogOtherId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.LogOtherId = (logSetting.LogOtherId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.MessageUpdated:
-                            channelId = (ulong?) (logSetting.MessageUpdatedId = (long?) (logSetting.MessageUpdatedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.MessageUpdatedId = (logSetting.MessageUpdatedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.MessageDeleted:
-                            channelId = (ulong?) (logSetting.MessageDeletedId = (long?) (logSetting.MessageDeletedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.MessageDeletedId = (logSetting.MessageDeletedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserJoined:
-                            channelId = (ulong?) (logSetting.UserJoinedId = (long?) (logSetting.UserJoinedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserJoinedId = (logSetting.UserJoinedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserLeft:
-                            channelId = (ulong?) (logSetting.UserLeftId = (long?) (logSetting.UserLeftId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserLeftId = (logSetting.UserLeftId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserBanned:
-                            channelId = (ulong?) (logSetting.UserBannedId = (long?) (logSetting.UserBannedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserBannedId = (logSetting.UserBannedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserUnbanned:
-                            channelId = (ulong?) (logSetting.UserUnbannedId = (long?) (logSetting.UserUnbannedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserUnbannedId = (logSetting.UserUnbannedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserUpdated:
-                            channelId = (ulong?) (logSetting.UserUpdatedId = (long?) (logSetting.UserUpdatedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserUpdatedId = (logSetting.UserUpdatedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserMuted:
-                            channelId = (ulong?) (logSetting.UserMutedId = (long?) (logSetting.UserMutedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.UserMutedId = (logSetting.UserMutedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.ChannelCreated:
-                            channelId = (ulong?) (logSetting.ChannelCreatedId = (long?) (logSetting.ChannelCreatedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.ChannelCreatedId = (logSetting.ChannelCreatedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.ChannelDestroyed:
-                            channelId = (ulong?) (logSetting.ChannelDestroyedId = (long?) (logSetting.ChannelDestroyedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.ChannelDestroyedId = (logSetting.ChannelDestroyedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.ChannelUpdated:
-                            channelId = (ulong?) (logSetting.ChannelUpdatedId = (long?) (logSetting.ChannelUpdatedId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.ChannelUpdatedId = (logSetting.ChannelUpdatedId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.UserPresence:
-                            channelId = (ulong?) (logSetting.LogUserPresenceId = (long?) (logSetting.LogUserPresenceId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.LogUserPresenceId = (logSetting.LogUserPresenceId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.VoicePresence:
-                            channelId = (ulong?) (logSetting.LogVoicePresenceId = (long?) (logSetting.LogVoicePresenceId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.LogVoicePresenceId = (logSetting.LogVoicePresenceId == null ? (long)channel.Id : default(long?));
                             break;
                         case LogType.VoicePresenceTTS:
-                            channelId = (ulong?) (logSetting.LogVoicePresenceTTSId = (long?) (logSetting.LogVoicePresenceTTSId == null ? channel.Id : default(ulong?)));
+                            channelId = logSetting.LogVoicePresenceTTSId = (logSetting.LogVoicePresenceTTSId == null ? (long)channel.Id : default(long?));
                             break;
                     }
 
