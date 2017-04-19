@@ -90,7 +90,7 @@ namespace NadekoBot.Modules.Gambling
                 if (entry.Type == ShopEntryType.Role)
                 {
                     var guser = (IGuildUser)Context.User;
-                    var role = Context.Guild.GetRole(entry.RoleId);
+                    var role = Context.Guild.GetRole((ulong) entry.RoleId);
 
                     if (role == null)
                     {
@@ -111,7 +111,7 @@ namespace NadekoBot.Modules.Gambling
                             await ReplyErrorLocalized("shop_role_purchase_error").ConfigureAwait(false);
                             return;
                         }
-                        await CurrencyHandler.AddCurrencyAsync(entry.AuthorId, $"Shop sell item - {entry.Type}", GetProfitAmount(entry.Price));
+                        await CurrencyHandler.AddCurrencyAsync((ulong) entry.AuthorId, $"Shop sell item - {entry.Type}", GetProfitAmount(entry.Price));
                         await ReplyConfirmLocalized("shop_role_purchase", Format.Bold(role.Name)).ConfigureAwait(false);
                         return;
                     }
@@ -150,7 +150,7 @@ namespace NadekoBot.Modules.Gambling
                                 .AddField(efb => efb.WithName(GetText("name")).WithValue(entry.Name).WithIsInline(true)))
                                 .ConfigureAwait(false);
 
-                            await CurrencyHandler.AddCurrencyAsync(entry.AuthorId,
+                            await CurrencyHandler.AddCurrencyAsync((ulong) entry.AuthorId,
                                     $"Shop sell item - {entry.Name}",
                                     GetProfitAmount(entry.Price)).ConfigureAwait(false);
                         }
@@ -194,8 +194,8 @@ namespace NadekoBot.Modules.Gambling
                     Name = "-",
                     Price = price,
                     Type = ShopEntryType.Role,
-                    AuthorId = Context.User.Id,
-                    RoleId = role.Id,
+                    AuthorId = (long) Context.User.Id,
+                    RoleId = (long) role.Id,
                     RoleName = role.Name
                 };
                 using (var uow = DbHandler.UnitOfWork())
@@ -221,7 +221,7 @@ namespace NadekoBot.Modules.Gambling
                     Name = name.TrimTo(100),
                     Price = price,
                     Type = ShopEntryType.List,
-                    AuthorId = Context.User.Id,
+                    AuthorId = (long) Context.User.Id,
                     Items = new HashSet<ShopEntryItem>(),
                 };
                 using (var uow = DbHandler.UnitOfWork())

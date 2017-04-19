@@ -86,7 +86,7 @@ namespace NadekoBot.Modules.Utility
                     try
                     {
                         if (Channel == null)
-                            Channel = Guild.GetTextChannel(Repeater.ChannelId);
+                            Channel = Guild.GetTextChannel((ulong) Repeater.ChannelId);
 
                         if (Channel != null)
                             oldMsg = await Channel.SendMessageAsync(toSend.SanitizeMentions()).ConfigureAwait(false);

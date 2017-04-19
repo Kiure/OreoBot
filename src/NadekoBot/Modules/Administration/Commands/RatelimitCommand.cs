@@ -78,13 +78,13 @@ namespace NadekoBot.Modules.Administration
 
                 IgnoredRoles = new ConcurrentDictionary<ulong, HashSet<ulong>>(
                     NadekoBot.AllGuildConfigs
-                             .ToDictionary(x => x.GuildId,
-                                           x => new HashSet<ulong>(x.SlowmodeIgnoredRoles.Select(y => y.RoleId))));
+                             .ToDictionary(x => (ulong)x.GuildId,
+                                           x => new HashSet<ulong>(x.SlowmodeIgnoredRoles.Select(y => (ulong)y.RoleId))));
 
                 IgnoredUsers = new ConcurrentDictionary<ulong, HashSet<ulong>>(
                     NadekoBot.AllGuildConfigs
-                             .ToDictionary(x => x.GuildId,
-                                           x => new HashSet<ulong>(x.SlowmodeIgnoredUsers.Select(y => y.UserId))));
+                             .ToDictionary(x => (ulong)x.GuildId,
+                                           x => new HashSet<ulong>(x.SlowmodeIgnoredUsers.Select(y => (ulong)y.UserId))));
 
                 NadekoBot.Client.MessageReceived += async (umsg) =>
                  {
@@ -153,7 +153,7 @@ namespace NadekoBot.Modules.Administration
             {
                 var siu = new SlowmodeIgnoredUser
                 {
-                    UserId = user.Id
+                    UserId = (long) user.Id
                 };
 
                 HashSet<SlowmodeIgnoredUser> usrs;
@@ -169,7 +169,7 @@ namespace NadekoBot.Modules.Administration
                     await uow.CompleteAsync().ConfigureAwait(false);
                 }
 
-                IgnoredUsers.AddOrUpdate(Context.Guild.Id, new HashSet<ulong>(usrs.Select(x => x.UserId)), (key, old) => new HashSet<ulong>(usrs.Select(x => x.UserId)));
+                IgnoredUsers.AddOrUpdate(Context.Guild.Id, new HashSet<ulong>(usrs.Select(x => (ulong)x.UserId)), (key, old) => new HashSet<ulong>(usrs.Select(x => (ulong)x.UserId)));
 
                 if(removed)
                     await ReplyConfirmLocalized("slowmodewl_user_stop", Format.Bold(user.ToString())).ConfigureAwait(false);
@@ -185,7 +185,7 @@ namespace NadekoBot.Modules.Administration
             {
                 var sir = new SlowmodeIgnoredRole
                 {
-                    RoleId = role.Id
+                    RoleId = (long) role.Id
                 };
 
                 HashSet<SlowmodeIgnoredRole> roles;
@@ -201,7 +201,7 @@ namespace NadekoBot.Modules.Administration
                     await uow.CompleteAsync().ConfigureAwait(false);
                 }
 
-                IgnoredRoles.AddOrUpdate(Context.Guild.Id, new HashSet<ulong>(roles.Select(x => x.RoleId)), (key, old) => new HashSet<ulong>(roles.Select(x => x.RoleId)));
+                IgnoredRoles.AddOrUpdate(Context.Guild.Id, new HashSet<ulong>(roles.Select(x => (ulong)x.RoleId)), (key, old) => new HashSet<ulong>(roles.Select(x => (ulong)x.RoleId)));
 
                 if (removed)
                     await ReplyConfirmLocalized("slowmodewl_role_stop", Format.Bold(role.ToString())).ConfigureAwait(false);

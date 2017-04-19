@@ -43,8 +43,8 @@ namespace NadekoBot.Modules.Administration
                     {
                         if (cmd.GuildId != null)
                         {
-                            var guild = NadekoBot.Client.GetGuild(cmd.GuildId.Value);
-                            var channel = guild?.GetChannel(cmd.ChannelId) as SocketTextChannel;
+                            var guild = NadekoBot.Client.GetGuild((ulong) cmd.GuildId.Value);
+                            var channel = guild?.GetChannel((ulong) cmd.ChannelId) as SocketTextChannel;
                             if (channel == null)
                                 continue;
 
@@ -71,11 +71,11 @@ namespace NadekoBot.Modules.Administration
                 var cmd = new StartupCommand()
                 {
                     CommandText = cmdText,
-                    ChannelId = Context.Channel.Id,
+                    ChannelId = (long) Context.Channel.Id,
                     ChannelName = Context.Channel.Name,
-                    GuildId = Context.Guild?.Id,
+                    GuildId = (long?) Context.Guild?.Id,
                     GuildName = Context.Guild?.Name,
-                    VoiceChannelId = guser.VoiceChannel?.Id,
+                    VoiceChannelId = (long?) guser.VoiceChannel?.Id,
                     VoiceChannelName = guser.VoiceChannel?.Name,
                 };
                 using (var uow = DbHandler.UnitOfWork())

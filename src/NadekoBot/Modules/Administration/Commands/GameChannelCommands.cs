@@ -38,7 +38,7 @@ namespace NadekoBot.Modules.Administration
 
                 gameVoiceChannels = new ConcurrentHashSet<ulong>(
                     NadekoBot.AllGuildConfigs.Where(gc => gc.GameVoiceChannel != null)
-                                             .Select(gc => gc.GameVoiceChannel.Value));
+                                             .Select(gc => (ulong)gc.GameVoiceChannel.Value));
 
                 NadekoBot.Client.UserVoiceStateUpdated += Client_UserVoiceStateUpdated;
 
@@ -100,17 +100,17 @@ namespace NadekoBot.Modules.Administration
                 {
                     var gc = uow.GuildConfigs.For(Context.Guild.Id, set => set);
 
-                    if (gc.GameVoiceChannel == vch.Id)
+                    if (gc.GameVoiceChannel == (long?)vch.Id)
                     {
                         gameVoiceChannels.TryRemove(vch.Id);
-                        id = gc.GameVoiceChannel = null;
+                        id = (ulong?) (gc.GameVoiceChannel = null);
                     }
                     else
                     {
                         if(gc.GameVoiceChannel != null)
-                            gameVoiceChannels.TryRemove(gc.GameVoiceChannel.Value);
+                            gameVoiceChannels.TryRemove((ulong) gc.GameVoiceChannel.Value);
                         gameVoiceChannels.Add(vch.Id);
-                        id = gc.GameVoiceChannel = vch.Id;
+                        id = (ulong?) (gc.GameVoiceChannel = (long?) vch.Id);
                     }
 
                     uow.Complete();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -13,16 +14,16 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BotConfigId = table.Column<int>(nullable: true),
-                    ChannelId = table.Column<ulong>(nullable: false),
+                    ChannelId = table.Column<long>(nullable: false),
                     ChannelName = table.Column<string>(nullable: true),
                     CommandText = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: true),
-                    GuildId = table.Column<ulong>(nullable: true),
+                    GuildId = table.Column<long>(nullable: true),
                     GuildName = table.Column<string>(nullable: true),
                     Index = table.Column<int>(nullable: false),
-                    VoiceChannelId = table.Column<ulong>(nullable: true),
+                    VoiceChannelId = table.Column<long>(nullable: true),
                     VoiceChannelName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

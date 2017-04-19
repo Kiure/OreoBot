@@ -27,8 +27,8 @@ namespace NadekoBot.Modules.Administration
 
                 var warn = new Warning()
                 {
-                    UserId = userId,
-                    GuildId = guildId,
+                    UserId = (long) userId,
+                    GuildId = (long) guildId,
                     Forgiven = false,
                     Reason = reason,
                     Moderator = modName,
@@ -43,7 +43,7 @@ namespace NadekoBot.Modules.Administration
 
                     warnings += uow.Warnings
                         .For(guildId, userId)                        
-                        .Where(w => !w.Forgiven && w.UserId == userId)
+                        .Where(w => !w.Forgiven && w.UserId == (long) userId)
                         .Count();
 
                     uow.Warnings.Add(warn);

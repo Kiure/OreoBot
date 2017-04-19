@@ -77,14 +77,14 @@ namespace NadekoBot.Services.Database.Models
         public HashSet<SlowmodeIgnoredRole> SlowmodeIgnoredRoles { get; set; }
 
         public List<ShopEntry> ShopEntries { get; set; }
-        public ulong? GameVoiceChannel { get; set; } = null;
+        public long? GameVoiceChannel { get; set; } = null;
 
         //public List<ProtectionIgnoredChannel> ProtectionIgnoredChannels { get; set; } = new List<ProtectionIgnoredChannel>();
     }
 
     public class SlowmodeIgnoredUser : DbEntity
     {
-        public ulong UserId { get; set; }
+        public long UserId { get; set; }
 
         // override object.Equals
         public override bool Equals(object obj)
@@ -106,7 +106,7 @@ namespace NadekoBot.Services.Database.Models
 
     public class SlowmodeIgnoredRole : DbEntity
     {
-        public ulong RoleId { get; set; }
+        public long RoleId { get; set; }
 
         // override object.Equals
         public override bool Equals(object obj)

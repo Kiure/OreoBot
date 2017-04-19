@@ -173,13 +173,13 @@ namespace NadekoBot.Modules.Utility
                     using (var uow = DbHandler.UnitOfWork())
                     {
                         var users = uow._context.Set<RewardedUser>();
-                        var usr = users.FirstOrDefault(x => x.UserId == userId);
+                        var usr = users.FirstOrDefault(x => x.UserId == (long) userId);
 
                         if (usr == null)
                         {
                             users.Add(new RewardedUser()
                             {
-                                UserId = userId,
+                                UserId = (long) userId,
                                 LastReward = now,
                                 AmountRewardedThisMonth = amount,
                             });
@@ -208,7 +208,7 @@ namespace NadekoBot.Modules.Utility
                             usr.LastReward = now;
                             usr.AmountRewardedThisMonth = amount;
 
-                            await CurrencyHandler.AddCurrencyAsync(usr.UserId, "Patreon reward - update", toAward, uow).ConfigureAwait(false);
+                            await CurrencyHandler.AddCurrencyAsync((ulong) usr.UserId, "Patreon reward - update", toAward, uow).ConfigureAwait(false);
 
                             await uow.CompleteAsync().ConfigureAwait(false);
                             return toAward;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NadekoBot.Migrations
@@ -13,14 +14,14 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    AuthorId = table.Column<ulong>(nullable: false),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AuthorId = table.Column<long>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true),
                     Index = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    RoleId = table.Column<ulong>(nullable: false),
+                    RoleId = table.Column<long>(nullable: false),
                     RoleName = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
@@ -40,7 +41,7 @@ namespace NadekoBot.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ShopEntryId = table.Column<int>(nullable: true),
                     Text = table.Column<string>(nullable: true)

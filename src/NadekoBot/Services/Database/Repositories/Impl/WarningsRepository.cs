@@ -14,7 +14,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public Warning[] For(ulong guildId, ulong userId)
         {
-            var query = _set.Where(x => x.GuildId == guildId && x.UserId == userId)
+            var query = _set.Where(x => x.GuildId == (long) guildId && x.UserId == (long) userId)
                 .OrderByDescending(x => x.DateAdded);
 
             return query.ToArray();
@@ -22,7 +22,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
 
         public async Task ForgiveAll(ulong guildId, ulong userId, string mod)
         {
-            await _set.Where(x => x.GuildId == guildId && x.UserId == userId)
+            await _set.Where(x => x.GuildId == (long) guildId && x.UserId == (long) userId)
                 .ForEachAsync(x =>
                 {
                     if (x.Forgiven != true)

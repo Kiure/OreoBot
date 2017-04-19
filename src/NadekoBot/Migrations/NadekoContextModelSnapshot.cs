@@ -100,6 +100,28 @@ namespace NadekoBot.Migrations
                 b.ToTable("BlacklistItem");
             });
 
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.BlockedCmdOrMdl", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<int?>("BotConfigId");
+
+                b.Property<int?>("BotConfigId1");
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<string>("Name");
+
+                b.HasKey("Id");
+
+                b.HasIndex("BotConfigId");
+
+                b.HasIndex("BotConfigId1");
+
+                b.ToTable("BlockedCmdOrMdl");
+            });
+
             modelBuilder.Entity("NadekoBot.Services.Database.Models.BotConfig", b =>
             {
                 b.Property<int>("Id")
@@ -534,6 +556,8 @@ namespace NadekoBot.Migrations
 
                 b.Property<bool>("FilterWords");
 
+                b.Property<long?>("GameVoiceChannel");
+
                 b.Property<long>("GreetMessageChannelId");
 
                 b.Property<long>("GuildId");
@@ -559,6 +583,8 @@ namespace NadekoBot.Migrations
                 b.Property<bool>("VerbosePermissions");
 
                 b.Property<bool>("VoicePlusTextEnabled");
+
+                b.Property<bool>("WarningsInitialized");
 
                 b.HasKey("Id");
 
@@ -930,6 +956,27 @@ namespace NadekoBot.Migrations
                 b.ToTable("Reminders");
             });
 
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.RewardedUser", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<int>("AmountRewardedThisMonth");
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<DateTime>("LastReward");
+
+                b.Property<long>("UserId");
+
+                b.HasKey("Id");
+
+                b.HasIndex("UserId")
+                    .IsUnique();
+
+                b.ToTable("RewardedUsers");
+            });
+
             modelBuilder.Entity("NadekoBot.Services.Database.Models.SelfAssignedRole", b =>
             {
                 b.Property<int>("Id")
@@ -947,6 +994,122 @@ namespace NadekoBot.Migrations
                     .IsUnique();
 
                 b.ToTable("SelfAssignableRoles");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.ShopEntry", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<long>("AuthorId");
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<int?>("GuildConfigId");
+
+                b.Property<int>("Index");
+
+                b.Property<string>("Name");
+
+                b.Property<int>("Price");
+
+                b.Property<long>("RoleId");
+
+                b.Property<string>("RoleName");
+
+                b.Property<int>("Type");
+
+                b.HasKey("Id");
+
+                b.HasIndex("GuildConfigId");
+
+                b.ToTable("ShopEntry");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.ShopEntryItem", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<int?>("ShopEntryId");
+
+                b.Property<string>("Text");
+
+                b.HasKey("Id");
+
+                b.HasIndex("ShopEntryId");
+
+                b.ToTable("ShopEntryItem");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.SlowmodeIgnoredRole", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<int?>("GuildConfigId");
+
+                b.Property<long>("RoleId");
+
+                b.HasKey("Id");
+
+                b.HasIndex("GuildConfigId");
+
+                b.ToTable("SlowmodeIgnoredRole");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.SlowmodeIgnoredUser", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<int?>("GuildConfigId");
+
+                b.Property<long>("UserId");
+
+                b.HasKey("Id");
+
+                b.HasIndex("GuildConfigId");
+
+                b.ToTable("SlowmodeIgnoredUser");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.StartupCommand", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<int?>("BotConfigId");
+
+                b.Property<long>("ChannelId");
+
+                b.Property<string>("ChannelName");
+
+                b.Property<string>("CommandText");
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<long?>("GuildId");
+
+                b.Property<string>("GuildName");
+
+                b.Property<int>("Index");
+
+                b.Property<long?>("VoiceChannelId");
+
+                b.Property<string>("VoiceChannelName");
+
+                b.HasKey("Id");
+
+                b.HasIndex("BotConfigId");
+
+                b.ToTable("StartupCommand");
             });
 
             modelBuilder.Entity("NadekoBot.Services.Database.Models.UnmuteTimer", b =>
@@ -1061,6 +1224,52 @@ namespace NadekoBot.Migrations
                 b.ToTable("WaifuUpdates");
             });
 
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.Warning", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<bool>("Forgiven");
+
+                b.Property<string>("ForgivenBy");
+
+                b.Property<long>("GuildId");
+
+                b.Property<string>("Moderator");
+
+                b.Property<string>("Reason");
+
+                b.Property<long>("UserId");
+
+                b.HasKey("Id");
+
+                b.ToTable("Warnings");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.WarningPunishment", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd();
+
+                b.Property<int>("Count");
+
+                b.Property<DateTime?>("DateAdded");
+
+                b.Property<int?>("GuildConfigId");
+
+                b.Property<int>("Punishment");
+
+                b.Property<int>("Time");
+
+                b.HasKey("Id");
+
+                b.HasIndex("GuildConfigId");
+
+                b.ToTable("WarningPunishment");
+            });
+
             modelBuilder.Entity("NadekoBot.Services.Database.Models.AntiRaidSetting", b =>
             {
                 b.HasOne("NadekoBot.Services.Database.Models.GuildConfig", "GuildConfig")
@@ -1089,6 +1298,17 @@ namespace NadekoBot.Migrations
                 b.HasOne("NadekoBot.Services.Database.Models.BotConfig")
                     .WithMany("Blacklist")
                     .HasForeignKey("BotConfigId");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.BlockedCmdOrMdl", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.BotConfig")
+                    .WithMany("BlockedCommands")
+                    .HasForeignKey("BotConfigId");
+
+                b.HasOne("NadekoBot.Services.Database.Models.BotConfig")
+                    .WithMany("BlockedModules")
+                    .HasForeignKey("BotConfigId1");
             });
 
             modelBuilder.Entity("NadekoBot.Services.Database.Models.ClashCaller", b =>
@@ -1241,6 +1461,41 @@ namespace NadekoBot.Migrations
                     .HasForeignKey("BotConfigId");
             });
 
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.ShopEntry", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.GuildConfig")
+                    .WithMany("ShopEntries")
+                    .HasForeignKey("GuildConfigId");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.ShopEntryItem", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.ShopEntry")
+                    .WithMany("Items")
+                    .HasForeignKey("ShopEntryId");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.SlowmodeIgnoredRole", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.GuildConfig")
+                    .WithMany("SlowmodeIgnoredRoles")
+                    .HasForeignKey("GuildConfigId");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.SlowmodeIgnoredUser", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.GuildConfig")
+                    .WithMany("SlowmodeIgnoredUsers")
+                    .HasForeignKey("GuildConfigId");
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.StartupCommand", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.BotConfig")
+                    .WithMany("StartupCommands")
+                    .HasForeignKey("BotConfigId");
+            });
+
             modelBuilder.Entity("NadekoBot.Services.Database.Models.UnmuteTimer", b =>
             {
                 b.HasOne("NadekoBot.Services.Database.Models.GuildConfig")
@@ -1285,6 +1540,13 @@ namespace NadekoBot.Migrations
                     .WithMany()
                     .HasForeignKey("UserId")
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity("NadekoBot.Services.Database.Models.WarningPunishment", b =>
+            {
+                b.HasOne("NadekoBot.Services.Database.Models.GuildConfig")
+                    .WithMany("WarnPunishments")
+                    .HasForeignKey("GuildConfigId");
             });
         }
     }

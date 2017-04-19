@@ -88,11 +88,11 @@ Nadeko Support Server: https://discord.gg/nadekobot";
     {
         public int Index { get; set; }
         public string CommandText { get; set; }
-        public ulong ChannelId { get; set; }
+        public long ChannelId { get; set; }
         public string ChannelName { get; set; }
-        public ulong? GuildId { get; set; }
+        public long? GuildId { get; set; }
         public string GuildName { get; set; }
-        public ulong? VoiceChannelId { get; set; }
+        public long? VoiceChannelId { get; set; }
         public string VoiceChannelName { get; set; }
     }
 

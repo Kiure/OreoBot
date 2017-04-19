@@ -77,7 +77,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
             {
                 _set.Add((config = new GuildConfig
                 {
-                    GuildId = guildId,
+                    GuildId = (long) guildId,
                     Permissions = Permissionv2.GetDefaultPermlist,
                     WarningsInitialized = true,
                     WarnPunishments = DefaultWarnPunishments,
@@ -104,7 +104,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
             {
                 _set.Add((config = new GuildConfig
                 {
-                    GuildId = guildId,
+                    GuildId = (long) guildId,
                     Permissions = Permissionv2.GetDefaultPermlist,
                     WarningsInitialized = true,
                     WarnPunishments = DefaultWarnPunishments,

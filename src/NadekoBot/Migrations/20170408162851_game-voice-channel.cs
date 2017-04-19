@@ -8,7 +8,7 @@ namespace NadekoBot.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<ulong>(
+            migrationBuilder.AddColumn<long>(
                 name: "GameVoiceChannel",
                 table: "GuildConfigs",
                 nullable: true);

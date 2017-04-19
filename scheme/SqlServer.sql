@@ -746,3 +746,147 @@ GO
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20170320090138_command-aliasing', N'1.1.0-rtm-22752');
 GO
+ALTER TABLE [GuildConfigs] ADD [WarningsInitialized] bit NOT NULL DEFAULT 0;
+GO
+CREATE TABLE [Warnings] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [Forgiven] bit NOT NULL,
+    [ForgivenBy] nvarchar(max),
+    [GuildId] bigint NOT NULL,
+    [Moderator] nvarchar(max),
+    [Reason] nvarchar(max),
+    [UserId] bigint NOT NULL,
+    CONSTRAINT [PK_Warnings] PRIMARY KEY ([Id])
+);
+GO
+CREATE TABLE [WarningPunishment] (
+    [Id] int NOT NULL IDENTITY,
+    [Count] int NOT NULL,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [Punishment] int NOT NULL,
+    [Time] int NOT NULL,
+    CONSTRAINT [PK_WarningPunishment] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_WarningPunishment_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_WarningPunishment_GuildConfigId] ON [WarningPunishment] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170330000613_warning-commands', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [StartupCommand] (
+    [Id] int NOT NULL IDENTITY,
+    [BotConfigId] int,
+    [ChannelId] bigint NOT NULL,
+    [ChannelName] nvarchar(max),
+    [CommandText] nvarchar(max),
+    [DateAdded] datetime2,
+    [GuildId] bigint,
+    [GuildName] nvarchar(max),
+    [Index] int NOT NULL,
+    [VoiceChannelId] bigint,
+    [VoiceChannelName] nvarchar(max),
+    CONSTRAINT [PK_StartupCommand] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_StartupCommand_BotConfig_BotConfigId] FOREIGN KEY ([BotConfigId]) REFERENCES [BotConfig] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_StartupCommand_BotConfigId] ON [StartupCommand] ([BotConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170331093025_startup-commands', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [SlowmodeIgnoredRole] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [RoleId] bigint NOT NULL,
+    CONSTRAINT [PK_SlowmodeIgnoredRole] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_SlowmodeIgnoredRole_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE TABLE [SlowmodeIgnoredUser] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [UserId] bigint NOT NULL,
+    CONSTRAINT [PK_SlowmodeIgnoredUser] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_SlowmodeIgnoredUser_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_SlowmodeIgnoredRole_GuildConfigId] ON [SlowmodeIgnoredRole] ([GuildConfigId]);
+GO
+CREATE INDEX [IX_SlowmodeIgnoredUser_GuildConfigId] ON [SlowmodeIgnoredUser] ([GuildConfigId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170401161600_slowmode-whitelist', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [RewardedUsers] (
+    [Id] int NOT NULL IDENTITY,
+    [AmountRewardedThisMonth] int NOT NULL,
+    [DateAdded] datetime2,
+    [LastReward] datetime2 NOT NULL,
+    [UserId] bigint NOT NULL,
+    CONSTRAINT [PK_RewardedUsers] PRIMARY KEY ([Id])
+);
+GO
+CREATE UNIQUE INDEX [IX_RewardedUsers_UserId] ON [RewardedUsers] ([UserId]) WHERE [UserId] IS NOT NULL;
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170401205753_patreon-rewards', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [ShopEntry] (
+    [Id] int NOT NULL IDENTITY,
+    [AuthorId] bigint NOT NULL,
+    [DateAdded] datetime2,
+    [GuildConfigId] int,
+    [Index] int NOT NULL,
+    [Name] nvarchar(max),
+    [Price] int NOT NULL,
+    [RoleId] bigint NOT NULL,
+    [RoleName] nvarchar(max),
+    [Type] int NOT NULL,
+    CONSTRAINT [PK_ShopEntry] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ShopEntry_GuildConfigs_GuildConfigId] FOREIGN KEY ([GuildConfigId]) REFERENCES [GuildConfigs] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE TABLE [ShopEntryItem] (
+    [Id] int NOT NULL IDENTITY,
+    [DateAdded] datetime2,
+    [ShopEntryId] int,
+    [Text] nvarchar(max),
+    CONSTRAINT [PK_ShopEntryItem] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ShopEntryItem_ShopEntry_ShopEntryId] FOREIGN KEY ([ShopEntryId]) REFERENCES [ShopEntry] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_ShopEntry_GuildConfigId] ON [ShopEntry] ([GuildConfigId]);
+GO
+CREATE INDEX [IX_ShopEntryItem_ShopEntryId] ON [ShopEntryItem] ([ShopEntryId]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170405161814_flower-shop', N'1.1.0-rtm-22752');
+GO
+ALTER TABLE [GuildConfigs] ADD [GameVoiceChannel] bigint;
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170408162851_game-voice-channel', N'1.1.0-rtm-22752');
+GO
+CREATE TABLE [BlockedCmdOrMdl] (
+    [Id] int NOT NULL IDENTITY,
+    [BotConfigId] int,
+    [BotConfigId1] int,
+    [DateAdded] datetime2,
+    [Name] nvarchar(max),
+    CONSTRAINT [PK_BlockedCmdOrMdl] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_BlockedCmdOrMdl_BotConfig_BotConfigId] FOREIGN KEY ([BotConfigId]) REFERENCES [BotConfig] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_BlockedCmdOrMdl_BotConfig_BotConfigId1] FOREIGN KEY ([BotConfigId1]) REFERENCES [BotConfig] ([Id]) ON DELETE NO ACTION
+);
+GO
+CREATE INDEX [IX_BlockedCmdOrMdl_BotConfigId] ON [BlockedCmdOrMdl] ([BotConfigId]);
+GO
+CREATE INDEX [IX_BlockedCmdOrMdl_BotConfigId1] ON [BlockedCmdOrMdl] ([BotConfigId1]);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170409193757_gmod-and-cmod', N'1.1.0-rtm-22752');
+GO

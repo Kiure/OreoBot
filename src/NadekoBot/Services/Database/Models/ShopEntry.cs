@@ -14,13 +14,13 @@ namespace NadekoBot.Services.Database.Models
         public int Index { get; set; }
         public int Price { get; set; }
         public string Name { get; set; }
-        public ulong AuthorId { get; set; }
+        public long AuthorId { get; set; }
 
         public ShopEntryType Type { get; set; }
 
         //role
         public string RoleName { get; set; }
-        public ulong RoleId { get; set; }
+        public long RoleId { get; set; }
 
         //list
         public HashSet<ShopEntryItem> Items { get; set; } = new HashSet<ShopEntryItem>();
