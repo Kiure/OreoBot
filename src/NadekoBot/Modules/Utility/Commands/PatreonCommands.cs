@@ -179,7 +179,7 @@ namespace NadekoBot.Modules.Utility
                         {
                             users.Add(new RewardedUser()
                             {
-                                UserId = userId,
+                                UserId = (long) userId,
                                 PatreonUserId = data.User.id,
                                 LastReward = now,
                                 AmountRewardedThisMonth = amount,

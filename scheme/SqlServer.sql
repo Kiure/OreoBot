@@ -890,3 +890,8 @@ GO
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20170409193757_gmod-and-cmod', N'1.1.0-rtm-22752');
 GO
+ALTER TABLE [RewardedUsers] ADD [PatreonUserId] nvarchar(max);
+GO
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20170501103455_patreon-id', N'1.1.0-rtm-22752');
+GO

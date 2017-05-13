@@ -967,6 +967,8 @@ namespace NadekoBot.Migrations
 
                 b.Property<DateTime>("LastReward");
 
+                b.Property<string>("PatreonUserId");
+
                 b.Property<long>("UserId");
 
                 b.HasKey("Id");
