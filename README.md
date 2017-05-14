@@ -80,7 +80,15 @@ Change the variables below
 ### Setting up the Heroku
 - Log in your heroku account
 - Create a new app
-- Add the buildpacks
+- **NOW IT'S IMPORTANT that you download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), because
+  heroku now creating a heroku-16 stack app by default, and the dotnetcore doesn't work proper on it.
+  After you installed the application and created app on herokus webpage, open the cmd
+  and enter<br />
+  ```heroku login``` #enter your heroku credentials, after that use<br />
+  ```heroku stack:set cedar-14 -a your_application_name``` #it will rollback the heroku-16 back to cedar-14 stack.**<br />
+  Now we should be fine.
+  
+- Add the buildpacks on heroku website in your application settings
 	<br />
     `
     https://github.com/ScarletKuro/nadeko-dotnetcore-buildpack
