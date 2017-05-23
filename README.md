@@ -74,7 +74,7 @@ Change the variables below
     `
     **NB!** If you are using a domain name to connect to database take a note that some domain names may require a **www** prefix and some doesn't to connect to the database.
 	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.
-- Move the nadeko_run.sh and Procfile to the root folder.<br />
+- Move the nadeko_run.sh and Procfile to the root folder.(they are in the script folder)<br />
 ![ScreenShot](http://i.imgur.com/RxQ6QtH.png)
 
 ### Setting up the Heroku
@@ -106,7 +106,7 @@ Change the variables below
     https://github.com/ScarletKuro/heroku-buildpack-ffmpeg-static
     `
 - Deploy now the Nadeko using DropBox, Heroku CLI or Github
-- Turn the Dyno on after the build is complete
+- Turn the Dyno(in the overview tab click Configure Dyno) on after the build is complete
 - Enjoy!
 
 ### Video How to Setup
