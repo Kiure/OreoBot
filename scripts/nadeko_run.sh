@@ -10,7 +10,7 @@ osu=""
 scid=""
 connection="Data Source=;Initial Catalog=;User ID=;Password="
 
-echo "NadekoBot 1.3a"
+echo "NadekoBot 1.3b"
 
 if hash dotnet 2>/dev/null
 then

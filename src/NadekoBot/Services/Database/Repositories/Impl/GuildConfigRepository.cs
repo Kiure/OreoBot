@@ -98,7 +98,7 @@ namespace NadekoBot.Services.Database.Repositories.Impl
         {
             var config = _set.Include(gc => gc.LogSetting)
                             .ThenInclude(gc => gc.IgnoredChannels)
-               .FirstOrDefault(x => x.GuildId == guildId);
+               .FirstOrDefault(x => x.GuildId == (long) guildId);
 
             if (config == null)
             {
