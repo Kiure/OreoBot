@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using ImageSharp.Formats;
 using Image = ImageSharp.Image;
 
 namespace NadekoBot.Modules.Gambling
@@ -26,7 +27,7 @@ namespace NadekoBot.Modules.Gambling
             public async Task Draw(int num = 1)
             {
                 var cards = _allDecks.GetOrAdd(Context.Guild, (s) => new Cards());
-                var images = new List<Image>();
+                var images = new List<Image<Rgba32>>();
                 var cardObjects = new List<Cards.Card>();
                 if (num > 5) num = 5;
                 for (var i = 0; i < num; i++)
@@ -46,10 +47,10 @@ namespace NadekoBot.Modules.Gambling
                     var currentCard = cards.DrawACard();
                     cardObjects.Add(currentCard);
                     using (var stream = File.OpenRead(Path.Combine(_cardsPath, currentCard.ToString().ToLowerInvariant()+ ".jpg").Replace(' ','_')))
-                        images.Add(new Image(stream));
+                        images.Add(ImageSharp.Image.Load<Rgba32>(stream));
                 }
                 MemoryStream bitmapStream = new MemoryStream();
-                images.Merge().Save(bitmapStream);
+                images.Merge().Save(bitmapStream, new BmpEncoder());
                 bitmapStream.Position = 0;
                 var toSend = $"{Context.User.Mention}";
                 if (cardObjects.Count == 5)

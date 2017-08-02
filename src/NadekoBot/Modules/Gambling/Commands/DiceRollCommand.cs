@@ -9,7 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Image = ImageSharp.Image;
+using ImageSharp;
+using ImageSharp.Formats;
 
 namespace NadekoBot.Modules.Gambling
 {
@@ -34,7 +35,7 @@ namespace NadekoBot.Modules.Gambling
                 var imageStream = await Task.Run(() =>
                 {
                     var ms = new MemoryStream();
-                    new[] { GetDice(num1), GetDice(num2) }.Merge().Save(ms);
+                    new[] { GetDice(num1), GetDice(num2) }.Merge().Save(ms, new BmpEncoder());
                     ms.Position = 0;
                     return ms;
                 }).ConfigureAwait(false);
@@ -86,10 +87,10 @@ namespace NadekoBot.Modules.Gambling
                     await ReplyErrorLocalized("dice_invalid_number", 1, 30).ConfigureAwait(false);
                     return;
                 }
-
+                
                 var rng = new NadekoRandom();
 
-                var dice = new List<Image>(num);
+                var dice = new List<Image<Rgba32>>(num);
                 var values = new List<int>(num);
                 for (var i = 0; i < num; i++)
                 {
@@ -116,10 +117,10 @@ namespace NadekoBot.Modules.Gambling
                     dice.Insert(toInsert, GetDice(randomNumber));
                     values.Insert(toInsert, randomNumber);
                 }
-
+                
                 var bitmap = dice.Merge();
                 var ms = new MemoryStream();
-                bitmap.Save(ms);
+                bitmap.Save(ms, new BmpEncoder());
                 ms.Position = 0;
                 await Context.Channel.SendFileAsync(ms, "dice.png",
                     Context.User.Mention +  " " +
@@ -205,7 +206,7 @@ namespace NadekoBot.Modules.Gambling
                 await ReplyConfirmLocalized("dice_rolled", Format.Bold(rolled.ToString())).ConfigureAwait(false);
             }
 
-            private Image GetDice(int num)
+            private Image<Rgba32> GetDice(int num)
             {
                 if (num < 0 || num > 10)
                     throw new ArgumentOutOfRangeException(nameof(num));
@@ -216,15 +217,15 @@ namespace NadekoBot.Modules.Gambling
                     using (var imgOneStream = images[1].Value.ToStream())
                     using (var imgZeroStream = images[0].Value.ToStream())
                     {
-                        Image imgOne = new Image(imgOneStream);
-                        Image imgZero = new Image(imgZeroStream);
+                        Image<Rgba32> imgOne = ImageSharp.Image.Load<Rgba32>(imgOneStream);
+                        Image<Rgba32> imgZero = ImageSharp.Image.Load<Rgba32>(imgZeroStream);
 
                         return new[] { imgOne, imgZero }.Merge();
                     }
                 }
                 using (var die = NadekoBot.Images.Dice[num].Value.ToStream())
                 {
-                    return new Image(die);
+                    return ImageSharp.Image.Load<Rgba32>(die);
                 }
             }
         }

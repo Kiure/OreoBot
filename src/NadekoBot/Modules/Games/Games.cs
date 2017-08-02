@@ -12,8 +12,10 @@ using System.Threading;
 using NadekoBot.Extensions;
 using System.Net.Http;
 using ImageSharp;
+using ImageSharp.Formats;
 using NadekoBot.DataStructures;
 using NLog;
+using SixLabors.Primitives;
 
 namespace NadekoBot.Modules.Games
 {
@@ -127,7 +129,7 @@ namespace NadekoBot.Modules.Games
                     try
                     {
                         using (var ms = new MemoryStream(NadekoBot.Images.WifeMatrix.ToArray(), false))
-                        using (var img = new ImageSharp.Image(ms))
+                        using (var img = ImageSharp.Image.Load<Rgba32>(ms))
                         {
                             const int minx = 35;
                             const int miny = 385;
@@ -137,7 +139,7 @@ namespace NadekoBot.Modules.Games
                             var pointy = (int)(miny - length * ((Crazy - 4) / 6));
                             
                             using (var pointMs = new MemoryStream(NadekoBot.Images.RategirlDot.ToArray(), false))
-                            using (var pointImg = new ImageSharp.Image(pointMs))
+                            using (var pointImg = ImageSharp.Image.Load<Rgba32>(pointMs))
                             {
                                 img.DrawImage(pointImg, 100, default(Size), new Point(pointx - 10, pointy - 10));
                             }
@@ -146,7 +148,7 @@ namespace NadekoBot.Modules.Games
                             using (var http = new HttpClient())
                             using (var imgStream = new MemoryStream())
                             {
-                                img.Save(imgStream);
+                                img.Save(imgStream, new BmpEncoder());
                                 var byteContent = new ByteArrayContent(imgStream.ToArray());
                                 http.AddFakeHeaders();
 

@@ -13,6 +13,8 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ImageSharp.Formats;
+using SixLabors.Primitives;
 
 namespace NadekoBot.Extensions
 {
@@ -415,11 +417,11 @@ namespace NadekoBot.Extensions
 
         public static string Unmention(this string str) => str.Replace("@", "ම");
 
-        public static ImageSharp.Image Merge(this IEnumerable<ImageSharp.Image> images)
+        public static Image<Rgba32> Merge(this IEnumerable<ImageSharp.Image<Rgba32>> images)
         {
             var imgs = images.ToArray();
 
-            var canvas = new ImageSharp.Image(imgs.Sum(img => img.Width), imgs.Max(img => img.Height));
+            var canvas = new Image<Rgba32>(imgs.Sum(img => img.Width), imgs.Max(img => img.Height));
 
             var xOffset = 0;
             for (int i = 0; i < imgs.Length; i++)
@@ -431,10 +433,10 @@ namespace NadekoBot.Extensions
             return canvas;
         }
 
-        public static Stream ToStream(this ImageSharp.Image img)
+        public static Stream ToStream(this Image<Rgba32> img)
         {
             var imageStream = new MemoryStream();
-            img.Save(imageStream);
+            img.Save(imageStream, new BmpEncoder());
             imageStream.Position = 0;
             return imageStream;
         }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SixLabors.Primitives;
 
 namespace NadekoBot.Modules.Gambling
 {
@@ -160,7 +161,7 @@ namespace NadekoBot.Modules.Gambling
                     Interlocked.Add(ref _totalBet, amount);
                     using (var bgFileStream = NadekoBot.Images.SlotBackground.ToStream())
                     {
-                        var bgImage = new ImageSharp.Image(bgFileStream);
+                        var bgImage = ImageSharp.Image.Load<Rgba32>(bgFileStream);
 
                         var result = SlotMachine.Pull();
                         int[] numbers = result.Numbers;
@@ -168,7 +169,7 @@ namespace NadekoBot.Modules.Gambling
                         for (int i = 0; i < 3; i++)
                         {
                             using (var file = _images.SlotEmojis[numbers[i]].ToStream())
-                            using (var randomImage = new ImageSharp.Image(file))
+                            using (var randomImage = ImageSharp.Image.Load<Rgba32>(file))
                             {
                                 bgImage.DrawImage(randomImage, 100, default(Size), new Point(95 + 142 * i, 330));
                             }
@@ -181,7 +182,7 @@ namespace NadekoBot.Modules.Gambling
                         {
                             var digit = printWon % 10;
                             using (var fs = NadekoBot.Images.SlotNumbers[digit].ToStream())
-                            using (var img = new ImageSharp.Image(fs))
+                            using (var img = ImageSharp.Image.Load<Rgba32>(fs))
                             {
                                 bgImage.DrawImage(img, 100, default(Size), new Point(230 - n * 16, 462));
                             }
@@ -194,7 +195,7 @@ namespace NadekoBot.Modules.Gambling
                         {
                             var digit = printAmount % 10;
                             using (var fs = _images.SlotNumbers[digit].ToStream())
-                            using (var img = new ImageSharp.Image(fs))
+                            using (var img = ImageSharp.Image.Load<Rgba32>(fs))
                             { 
                                 bgImage.DrawImage(img, 100, default(Size), new Point(395 - n * 16, 462));
                             }
