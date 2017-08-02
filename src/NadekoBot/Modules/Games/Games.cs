@@ -148,7 +148,7 @@ namespace NadekoBot.Modules.Games
                             using (var http = new HttpClient())
                             using (var imgStream = new MemoryStream())
                             {
-                                img.Save(imgStream, new BmpEncoder());
+                                img.SaveAsPng(imgStream);
                                 var byteContent = new ByteArrayContent(imgStream.ToArray());
                                 http.AddFakeHeaders();
 

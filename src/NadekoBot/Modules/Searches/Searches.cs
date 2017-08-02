@@ -406,7 +406,7 @@ namespace NadekoBot.Modules.Searches
                         msg = GetText("hs_over_x", 4);
                     }
                     var ms = new MemoryStream();
-                    await Task.Run(() => images.AsEnumerable().Merge().Save(ms, new BmpEncoder()));
+                    await Task.Run(() => images.AsEnumerable().Merge().SaveAsPng(ms));
                     ms.Position = 0;
                     await Context.Channel.SendFileAsync(ms, arg + ".png", msg).ConfigureAwait(false);
                 }

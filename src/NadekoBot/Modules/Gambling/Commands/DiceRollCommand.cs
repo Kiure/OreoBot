@@ -35,7 +35,7 @@ namespace NadekoBot.Modules.Gambling
                 var imageStream = await Task.Run(() =>
                 {
                     var ms = new MemoryStream();
-                    new[] { GetDice(num1), GetDice(num2) }.Merge().Save(ms, new BmpEncoder());
+                    new[] { GetDice(num1), GetDice(num2) }.Merge().SaveAsPng(ms);
                     ms.Position = 0;
                     return ms;
                 }).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace NadekoBot.Modules.Gambling
                 
                 var bitmap = dice.Merge();
                 var ms = new MemoryStream();
-                bitmap.Save(ms, new BmpEncoder());
+                bitmap.SaveAsPng(ms);
                 ms.Position = 0;
                 await Context.Channel.SendFileAsync(ms, "dice.png",
                     Context.User.Mention +  " " +

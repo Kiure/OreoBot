@@ -13,7 +13,6 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ImageSharp.Formats;
 using SixLabors.Primitives;
 
 namespace NadekoBot.Extensions
@@ -433,10 +432,10 @@ namespace NadekoBot.Extensions
             return canvas;
         }
 
-        public static Stream ToStream(this Image<Rgba32> img)
+        public static Stream ToStream(this ImageSharp.Image<Rgba32> img)
         {
             var imageStream = new MemoryStream();
-            img.Save(imageStream, new BmpEncoder());
+            img.SaveAsPng(imageStream);
             imageStream.Position = 0;
             return imageStream;
         }

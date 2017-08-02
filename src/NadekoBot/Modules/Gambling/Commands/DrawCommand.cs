@@ -50,7 +50,7 @@ namespace NadekoBot.Modules.Gambling
                         images.Add(ImageSharp.Image.Load<Rgba32>(stream));
                 }
                 MemoryStream bitmapStream = new MemoryStream();
-                images.Merge().Save(bitmapStream, new BmpEncoder());
+                images.Merge().SaveAsPng(bitmapStream);
                 bitmapStream.Position = 0;
                 var toSend = $"{Context.User.Mention}";
                 if (cardObjects.Count == 5)
